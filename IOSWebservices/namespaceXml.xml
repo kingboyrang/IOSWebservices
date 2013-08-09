@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <soap:Body>
+        <getForexRmbRateResponse xmlns="http://webxml.com.cn/">
+            <getForexRmbRateResult>
+                <xs:schema id="getForexRmbRate" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+                    <xs:element name="getForexRmbRate" msdata:IsDataSet="true" msdata:UseCurrentLocale="true">
+                        <xs:complexType>
+                            <xs:choice minOccurs="0" maxOccurs="unbounded">
+                                <xs:element name="ForexRmbRate">
+                                    <xs:complexType>
+                                        <xs:sequence>
+                                            <xs:element name="Symbol" type="xs:string" minOccurs="0" />
+                                            <xs:element name="Name" type="xs:string" minOccurs="0" />
+                                            <xs:element name="mBuyPrice" type="xs:string" minOccurs="0" />
+                                            <xs:element name="fBuyPrice" type="xs:string" minOccurs="0" />
+                                            <xs:element name="SellPrice" type="xs:string" minOccurs="0" />
+                                            <xs:element name="BasePrice" type="xs:string" minOccurs="0" />
+                                        </xs:sequence>
+                                    </xs:complexType>
+                                </xs:element>
+                            </xs:choice>
+                        </xs:complexType>
+                    </xs:element>
+                </xs:schema>
+                <diffgr:diffgram xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:diffgr="urn:schemas-microsoft-com:xml-diffgram-v1">
+                    <getForexRmbRate xmlns="">
+                        <ForexRmbRate diffgr:id="ForexRmbRate1" msdata:rowOrder="0" diffgr:hasChanges="inserted">
+                            <Symbol>GBP</Symbol>
+                            <Name>英镑</Name>
+                            <mBuyPrice>915.810</mBuyPrice>
+                            <fBuyPrice>944.990</fBuyPrice>
+                            <SellPrice>952.580</SellPrice>
+                            <BasePrice>952.580</BasePrice>
+                        </ForexRmbRate>
+                        <ForexRmbRate diffgr:id="ForexRmbRate2" msdata:rowOrder="1" diffgr:hasChanges="inserted">
+                            <Symbol>HKD</Symbol>
+                            <Name>港币</Name>
+                            <mBuyPrice>78.110</mBuyPrice>
+                            <fBuyPrice>78.750</fBuyPrice>
+                            <SellPrice>79.050</SellPrice>
+                            <BasePrice>79.050</BasePrice>
+                        </ForexRmbRate>
+                        <ForexRmbRate diffgr:id="ForexRmbRate3" msdata:rowOrder="2" diffgr:hasChanges="inserted">
+                            <Symbol>USD</Symbol>
+                            <Name>美元</Name>
+                            <mBuyPrice>605.880</mBuyPrice>
+                            <fBuyPrice>610.780</fBuyPrice>
+                            <SellPrice>613.220</SellPrice>
+                            <BasePrice>613.220</BasePrice>
+                        </ForexRmbRate>
+                        <ForexRmbRate diffgr:id="ForexRmbRate4" msdata:rowOrder="3" diffgr:hasChanges="inserted">
+                            <Symbol>CHF</Symbol>
+                            <Name>瑞士法郎</Name>
+                            <mBuyPrice>641.580</mBuyPrice>
+                            <fBuyPrice>662.020</fBuyPrice>
+                            <SellPrice>667.330</SellPrice>
+                            <BasePrice>667.330</BasePrice>
+                        </ForexRmbRate>
+                        <ForexRmbRate diffgr:id="ForexRmbRate5" msdata:rowOrder="4" diffgr:hasChanges="inserted">
+                            <Symbol>SGD</Symbol>
+                            <Name>新加坡元</Name>
+                            <mBuyPrice>468.410</mBuyPrice>
+                            <fBuyPrice>483.330</fBuyPrice>
+                            <SellPrice>487.210</SellPrice>
+                            <BasePrice>487.210</BasePrice>
+                        </ForexRmbRate>
+                        <ForexRmbRate diffgr:id="ForexRmbRate6" msdata:rowOrder="5" diffgr:hasChanges="inserted"><Symbol>SEK</Symbol><Name>瑞典克朗</Name><mBuyPrice>90.850</mBuyPrice><fBuyPrice>93.740</fBuyPrice><SellPrice>94.500</SellPrice><BasePrice>94.500</BasePrice></ForexRmbRate>
+                        <ForexRmbRate diffgr:id="ForexRmbRate7" msdata:rowOrder="6" diffgr:hasChanges="inserted"><Symbol>DKK</Symbol><Name>丹麦克朗</Name><mBuyPrice>105.760</mBuyPrice><fBuyPrice>109.130</fBuyPrice><SellPrice>110.010</SellPrice><BasePrice>110.010</BasePrice></ForexRmbRate>
+                        <ForexRmbRate diffgr:id="ForexRmbRate8" msdata:rowOrder="7" diffgr:hasChanges="inserted"><Symbol>NOK</Symbol><Name>挪威克朗</Name><mBuyPrice>99.960</mBuyPrice><fBuyPrice>103.150</fBuyPrice><SellPrice>103.980</SellPrice><BasePrice>103.980</BasePrice></ForexRmbRate>
+                        <ForexRmbRate diffgr:id="ForexRmbRate9" msdata:rowOrder="8" diffgr:hasChanges="inserted"><Symbol>JPY</Symbol><Name>日元</Name><mBuyPrice>6.141</mBuyPrice><fBuyPrice>6.336</fBuyPrice><SellPrice>6.381</SellPrice><BasePrice>6.381</BasePrice></ForexRmbRate>
+                        <ForexRmbRate diffgr:id="ForexRmbRate10" msdata:rowOrder="9" diffgr:hasChanges="inserted"><Symbol>CAD</Symbol><Name>加拿大元</Name><mBuyPrice>566.980</mBuyPrice><fBuyPrice>585.040</fBuyPrice><SellPrice>589.740</SellPrice><BasePrice>589.740</BasePrice></ForexRmbRate>
+                        <ForexRmbRate diffgr:id="ForexRmbRate11" msdata:rowOrder="10" diffgr:hasChanges="inserted"><Symbol>AUD</Symbol><Name>澳大利亚元</Name><mBuyPrice>535.870</mBuyPrice><fBuyPrice>552.930</fBuyPrice><SellPrice>556.810</SellPrice><BasePrice>556.810</BasePrice></ForexRmbRate>
+                        <ForexRmbRate diffgr:id="ForexRmbRate12" msdata:rowOrder="11" diffgr:hasChanges="inserted"><Symbol>EUR</Symbol><Name>欧元</Name><mBuyPrice>788.690</mBuyPrice><fBuyPrice>813.810</fBuyPrice><SellPrice>820.350</SellPrice><BasePrice>820.350</BasePrice></ForexRmbRate>
+                        <ForexRmbRate diffgr:id="ForexRmbRate13" msdata:rowOrder="12" diffgr:hasChanges="inserted"><Symbol>MOP</Symbol><Name>澳门元</Name><mBuyPrice>73.940</mBuyPrice><fBuyPrice>76.510</fBuyPrice><SellPrice>76.800</SellPrice><BasePrice>79.270</BasePrice></ForexRmbRate>
+                        <ForexRmbRate diffgr:id="ForexRmbRate14" msdata:rowOrder="13" diffgr:hasChanges="inserted"><Symbol>PHP</Symbol><Name>菲律宾比索</Name><mBuyPrice>13.550</mBuyPrice><fBuyPrice>13.980</fBuyPrice><SellPrice>14.090</SellPrice><BasePrice>14.530</BasePrice></ForexRmbRate>
+                        <ForexRmbRate diffgr:id="ForexRmbRate15" msdata:rowOrder="14" diffgr:hasChanges="inserted"><Symbol>THB</Symbol><Name>泰国铢</Name><mBuyPrice>18.900</mBuyPrice><fBuyPrice>19.500</fBuyPrice><SellPrice>19.660</SellPrice><BasePrice>20.260</BasePrice></ForexRmbRate>
+                        <ForexRmbRate diffgr:id="ForexRmbRate16" msdata:rowOrder="15" diffgr:hasChanges="inserted"><Symbol>NZD</Symbol><Name>新西兰元</Name><mBuyPrice>470.840</mBuyPrice><fBuyPrice>485.840</fBuyPrice><SellPrice>489.750</SellPrice><BasePrice>492.670</BasePrice></ForexRmbRate>
+                        <ForexRmbRate diffgr:id="ForexRmbRate17" msdata:rowOrder="16" diffgr:hasChanges="inserted"><Symbol>KRW</Symbol><Name>韩国元</Name><mBuyPrice>0.531</mBuyPrice><fBuyPrice /><SellPrice /><BasePrice>0.576</BasePrice>
+                        </ForexRmbRate>
+                    </getForexRmbRate>
+                </diffgr:diffgram>
+            </getForexRmbRateResult>
+        </getForexRmbRateResponse>
+    </soap:Body>
+</soap:Envelope>
