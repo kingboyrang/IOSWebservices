@@ -135,6 +135,13 @@
     ServiceHelper *helper=[ServiceHelper sharedInstance];
     return [helper syncService:args error:error];
 }
++(ServiceResult*)syncMethodName:(NSString*)methodName{
+    return [self syncMethodName:methodName error:nil];
+}
++(ServiceResult*)syncMethodName:(NSString*)methodName error:(NSError**)error{
+    ServiceHelper *helper=[ServiceHelper sharedInstance];
+    return [helper syncServiceMethodName:methodName error:error];
+}
 #pragma mark -
 #pragma mark 异步请求
 -(void)asynService:(ServiceArgs*)args{
@@ -215,6 +222,18 @@
 }
 +(void)asynService:(ServiceArgs*)args progress:(progressRequestBlock)progress completed:(finishBlockRequest)finish failed:(failedBlockRequest)failed{
     ServiceHelper *helper=[ServiceHelper sharedInstance];
+    [helper asynService:args progress:progress completed:finish failed:failed];
+}
++(void)asynMethodName:(NSString*)methodName delegate:(id<ServiceHelperDelegate>)theDelegate{
+      ServiceHelper *helper=[ServiceHelper sharedInstance];
+      [helper asynServiceMethodName:methodName delegate:theDelegate];
+}
++(void)asynMethodName:(NSString*)methodName completed:(finishBlockRequest)finish failed:(failedBlockRequest)failed{
+    [self asynMethodName:methodName progress:nil completed:finish failed:failed];
+}
++(void)asynMethodName:(NSString*)methodName progress:(progressRequestBlock)progress completed:(finishBlockRequest)finish failed:(failedBlockRequest)failed{
+     ServiceHelper *helper=[ServiceHelper sharedInstance];
+     ServiceArgs *args=[ServiceArgs serviceMethodName:methodName];
     [helper asynService:args progress:progress completed:finish failed:failed];
 }
 #pragma mark -

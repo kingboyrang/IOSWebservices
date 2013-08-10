@@ -88,7 +88,7 @@
 //同步请求
 - (IBAction)SyncClick:(id)sender {
     
-    ServiceResult *result=[ServiceHelper syncService:[ServiceArgs serviceMethodName:@"getForexRmbRate"]];
+    ServiceResult *result=[ServiceHelper syncMethodName:@"getForexRmbRate"];
     NSLog(@"同步请求xml=%@\n",result);
     NSArray *arr=[result.xmlParse soapXmlSelectNodes:@"//ForexRmbRate"];
     NSLog(@"解析xml结果=%@\n",arr);
@@ -96,15 +96,15 @@
 //异步请求deletegated
 - (IBAction)asyncDelegatedClick:(id)sender {
     NSLog(@"异步请求deletegated\n");
-    [[ServiceHelper sharedInstance] asynServiceMethodName:@"getForexRmbRate" delegate:self];
+    [ServiceHelper asynMethodName:@"getForexRmbRate" delegate:self];
 }
 //异步请求block
 - (IBAction)asyncBlockClick:(id)sender {
     NSLog(@"异步请求block\n");
-    [[ServiceHelper sharedInstance] asynServiceMethodName:@"getForexRmbRate" completed:^(ServiceResult *result) {
+    [ServiceHelper asynMethodName:@"getForexRmbRate" completed:^(ServiceResult *result) {
         NSArray *arr=[result.xmlParse soapXmlSelectNodes:@"//ForexRmbRate"];
         NSLog(@"解析xml结果=%@\n",arr);
-        
+
     } failed:^(NSError *error, NSDictionary *userInfo) {
         NSLog(@"error=%@\n",[error description]);
     }];

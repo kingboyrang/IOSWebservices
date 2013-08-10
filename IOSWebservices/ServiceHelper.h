@@ -53,6 +53,8 @@ typedef void (^finishBlockQueueComplete)();
 -(ServiceResult*)syncServiceMethodName:(NSString*)methodName error:(NSError**)error;
 +(ServiceResult*)syncService:(ServiceArgs*)args;
 +(ServiceResult*)syncService:(ServiceArgs*)args error:(NSError**)error;
++(ServiceResult*)syncMethodName:(NSString*)methodName;
++(ServiceResult*)syncMethodName:(NSString*)methodName error:(NSError**)error;
 /*****异步请求***/
 -(void)asynService:(ServiceArgs*)args;
 -(void)asynService:(ServiceArgs*)args delegate:(id<ServiceHelperDelegate>)theDelegate;
@@ -64,6 +66,9 @@ typedef void (^finishBlockQueueComplete)();
 +(void)asynService:(ServiceArgs*)args delegate:(id<ServiceHelperDelegate>)theDelegate;
 +(void)asynService:(ServiceArgs*)args completed:(finishBlockRequest)finish failed:(failedBlockRequest)failed;
 +(void)asynService:(ServiceArgs*)args progress:(progressRequestBlock)progress completed:(finishBlockRequest)finish failed:(failedBlockRequest)failed;
++(void)asynMethodName:(NSString*)methodName delegate:(id<ServiceHelperDelegate>)theDelegate;
++(void)asynMethodName:(NSString*)methodName completed:(finishBlockRequest)finish failed:(failedBlockRequest)failed;
++(void)asynMethodName:(NSString*)methodName progress:(progressRequestBlock)progress completed:(finishBlockRequest)finish failed:(failedBlockRequest)failed;
 /*****队列请求***/
 -(void)addQueue:(ASIHTTPRequest*)request;
 -(void)startQueue;
