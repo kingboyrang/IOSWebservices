@@ -17,6 +17,8 @@
 {
     [super viewDidLoad];
     
+    
+    //[ServiceHelper syncService:args];
     /********************事项说明*****************************/
     //(1)亲，可以使用XmlParseHelper类去解析返回的xml
     
