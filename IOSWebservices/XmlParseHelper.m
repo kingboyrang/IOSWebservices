@@ -7,6 +7,8 @@
 //
 
 #import "XmlParseHelper.h"
+#import "GDataXMLNode.h"
+#import "XmlNode.h"
 #define soapXmlNamespaces [NSDictionary dictionaryWithObjectsAndKeys:@"http://schemas.xmlsoap.org/soap/envelope/",@"soap",@"http://www.w3.org/2001/XMLSchema-instance",@"xsi",@"http://www.w3.org/2001/XMLSchema",@"xsd",nil]
 @interface XmlNode()
 -(XmlNode*)xmlStringToXmlNode;
