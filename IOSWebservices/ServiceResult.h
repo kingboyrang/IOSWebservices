@@ -7,8 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "ASIHTTPRequest.h"
-#import "XmlParseHelper.h"
+@class ASIHTTPRequest;
+@class XmlParseHelper;
 @interface ServiceResult : NSObject
 @property(nonatomic,retain) ASIHTTPRequest *request;
 @property(nonatomic,retain) NSDictionary *userInfo;

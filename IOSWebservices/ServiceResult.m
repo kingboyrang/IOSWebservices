@@ -7,6 +7,8 @@
 //
 
 #import "ServiceResult.h"
+#import "ASIHTTPRequest.h"
+#import "XmlParseHelper.h"
 @implementation ServiceResult
 @synthesize request,userInfo;
 @synthesize xmlParse;
