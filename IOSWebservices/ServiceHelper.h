@@ -71,6 +71,7 @@ typedef void (^finishBlockQueueComplete)();
 +(void)asynMethodName:(NSString*)methodName progress:(progressRequestBlock)progress completed:(finishBlockRequest)finish failed:(failedBlockRequest)failed;
 /*****队列请求***/
 -(void)addQueue:(ASIHTTPRequest*)request;
+-(void)addRangeQueue:(NSArray*)requests;
 -(void)startQueue;
 -(void)startQueue:(id<ServiceHelperDelegate>)theDelegate;
 -(void)startQueue:(finishBlockRequest)finish failed:(failedBlockRequest)failed complete:(finishBlockQueueComplete)finishQueue;

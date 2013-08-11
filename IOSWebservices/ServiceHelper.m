@@ -290,6 +290,13 @@
     [self.requestList addObject:request];
     
 }
+-(void)addRangeQueue:(NSArray*)requests{
+    if (!self.requestList) {
+        self.requestList=[[NSMutableArray alloc] init];
+    }
+    [self.requestList removeAllObjects];
+    self.requestList=[NSMutableArray arrayWithArray:requests];
+}
 //队列请求处理
 -(void)queueFetchComplete:(ASIHTTPRequest*)request{
     if(self.delegate&&[self.delegate respondsToSelector:@selector(finishQueueComplete)]){
@@ -297,6 +304,9 @@
     }    
     if (_finishQueueBlock) {
         _finishQueueBlock();
+    }
+    if (self.requestList) {
+        [self.requestList removeAllObjects];
     }
 }
 -(void)requestFetchComplete:(ASIHTTPRequest*)request{

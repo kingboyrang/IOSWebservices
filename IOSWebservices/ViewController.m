@@ -114,6 +114,9 @@
 //队列请求
 - (IBAction)queueClick:(id)sender {
     ServiceHelper *helper=[ServiceHelper sharedInstance];
+    
+
+    
     //添加队列1
     ASIHTTPRequest *request1=[ServiceHelper commonSharedRequest:[ServiceArgs serviceMethodName:@"getForexRmbRate"]];
     [request1 setUserInfo:[NSDictionary dictionaryWithObjectsAndKeys:@"request1",@"name", nil]];
@@ -126,6 +129,7 @@
     ASIHTTPRequest *request2=[ServiceHelper commonSharedRequest:args1];
     [request1 setUserInfo:[NSDictionary dictionaryWithObjectsAndKeys:@"request2",@"name", nil]];
     [helper addQueue:request2];
+
 
     //执行队列
     [helper startQueue:^(ServiceResult *result) {
