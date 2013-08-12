@@ -36,10 +36,20 @@
     return self;
 }
 -(NSString*)soapMessageResultXml:(NSString*)methodName{
-    NSString *searchStr=[NSString stringWithFormat:@"//%@Result",methodName];
-    GDataXMLNode *node=[self getSingleNode:searchStr nameSpaces:soapXmlNamespaces];
-    if (node) {
-        return node.stringValue;
+    if (self.document) {
+        GDataXMLElement *root=[self.document rootElement];
+        NSString *searchStr=[NSString stringWithFormat:@"%@Result",methodName];
+        NSString *MsgResult=@"";
+        NSArray *result=[root children];
+        while ([result count]>0) {
+            NSString *nodeName=[[result objectAtIndex:0] name];
+            if ([nodeName isEqualToString: searchStr]) {
+                MsgResult=[[result objectAtIndex:0] stringValue];
+                break;
+            }
+            result=[[result objectAtIndex:0] children];
+        }
+        return MsgResult;
     }
     return @"";
 }
