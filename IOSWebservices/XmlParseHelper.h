@@ -15,6 +15,7 @@
 @property(nonatomic,retain) GDataXMLDocument *document;
 @property(nonatomic,readonly) XmlNode *xmlNode;
 
+-(void)setDataSource:(id)data;
 -(id)initWithData:(id)xml;
 //返回webservice内容
 -(NSString*)soapMessageResultXml:(NSString*)methodName;

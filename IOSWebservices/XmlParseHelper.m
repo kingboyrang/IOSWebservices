@@ -35,7 +35,19 @@
     }
     return self;
 }
+-(void)setDataSource:(id)data{
+    self.document=[self xmlDocumentObject:data];
+}
 -(NSString*)soapMessageResultXml:(NSString*)methodName{
+    if (methodName) {
+        NSString *searchStr=[NSString stringWithFormat:@"//%@Result",methodName];
+        GDataXMLNode *node=[self getSingleNode:searchStr];
+        if (node) {
+            return node.stringValue;
+        }
+    }
+    return @"";
+    /****
     if (self.document) {
         GDataXMLElement *root=[self.document rootElement];
         NSString *searchStr=[NSString stringWithFormat:@"%@Result",methodName];
@@ -52,6 +64,7 @@
         return MsgResult;
     }
     return @"";
+     ***/
 }
 -(XmlNode*)xmlNode{
     if (!_xmlNode) {

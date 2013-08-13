@@ -32,11 +32,11 @@
 		260C982817B3AC0300B0848C /* XmlNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 260C982717B3AC0300B0848C /* XmlNode.m */; };
 		260C983317B3BBA600B0848C /* testXml.xml in Resources */ = {isa = PBXBuildFile; fileRef = 260C983217B3BBA600B0848C /* testXml.xml */; };
 		260C983517B3F5CF00B0848C /* namespaceXml.xml in Resources */ = {isa = PBXBuildFile; fileRef = 260C983417B3F5CF00B0848C /* namespaceXml.xml */; };
+		26A6DF7A17BA7E4B0068CDEB /* ServiceResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 26A6DF7917BA7E4B0068CDEB /* ServiceResult.m */; };
 		26AEA71E17B50D1300A7FC6F /* GDataXMLNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 26AEA71D17B50D1300A7FC6F /* GDataXMLNode.m */; };
 		26B7BBD717B551430078636E /* XmlParseHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 26B7BBD617B551430078636E /* XmlParseHelper.m */; };
 		26B7BBDE17B551E30078636E /* ServiceHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 26B7BBD917B551E30078636E /* ServiceHelper.m */; };
 		26B7BBDF17B551E30078636E /* ServiceArgs.m in Sources */ = {isa = PBXBuildFile; fileRef = 26B7BBDB17B551E30078636E /* ServiceArgs.m */; };
-		26B7BBE017B551E30078636E /* ServiceResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 26B7BBDD17B551E30078636E /* ServiceResult.m */; };
 		26B7BBE417B556330078636E /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26B7BBE217B556330078636E /* ViewController.m */; };
 		26B7BBE517B556330078636E /* ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26B7BBE317B556330078636E /* ViewController.xib */; };
 /* End PBXBuildFile section */
@@ -84,6 +84,8 @@
 		260C982717B3AC0300B0848C /* XmlNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XmlNode.m; sourceTree = "<group>"; };
 		260C983217B3BBA600B0848C /* testXml.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = testXml.xml; sourceTree = "<group>"; };
 		260C983417B3F5CF00B0848C /* namespaceXml.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = namespaceXml.xml; sourceTree = "<group>"; };
+		26A6DF7817BA7E4B0068CDEB /* ServiceResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceResult.h; sourceTree = "<group>"; };
+		26A6DF7917BA7E4B0068CDEB /* ServiceResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceResult.m; sourceTree = "<group>"; };
 		26AEA71C17B50D1300A7FC6F /* GDataXMLNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDataXMLNode.h; sourceTree = "<group>"; };
 		26AEA71D17B50D1300A7FC6F /* GDataXMLNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDataXMLNode.m; sourceTree = "<group>"; };
 		26AEA71F17B50D3A00A7FC6F /* GDataDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDataDefines.h; sourceTree = "<group>"; };
@@ -94,8 +96,6 @@
 		26B7BBD917B551E30078636E /* ServiceHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceHelper.m; sourceTree = "<group>"; };
 		26B7BBDA17B551E30078636E /* ServiceArgs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceArgs.h; sourceTree = "<group>"; };
 		26B7BBDB17B551E30078636E /* ServiceArgs.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceArgs.m; sourceTree = "<group>"; };
-		26B7BBDC17B551E30078636E /* ServiceResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceResult.h; sourceTree = "<group>"; };
-		26B7BBDD17B551E30078636E /* ServiceResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceResult.m; sourceTree = "<group>"; };
 		26B7BBE117B556330078636E /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		26B7BBE217B556330078636E /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		26B7BBE317B556330078636E /* ViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ViewController.xib; sourceTree = "<group>"; };
@@ -237,12 +237,12 @@
 		260C982517B3ABEA00B0848C /* WebService */ = {
 			isa = PBXGroup;
 			children = (
+				26A6DF7817BA7E4B0068CDEB /* ServiceResult.h */,
+				26A6DF7917BA7E4B0068CDEB /* ServiceResult.m */,
 				26B7BBD817B551E30078636E /* ServiceHelper.h */,
 				26B7BBD917B551E30078636E /* ServiceHelper.m */,
 				26B7BBDA17B551E30078636E /* ServiceArgs.h */,
 				26B7BBDB17B551E30078636E /* ServiceArgs.m */,
-				26B7BBDC17B551E30078636E /* ServiceResult.h */,
-				26B7BBDD17B551E30078636E /* ServiceResult.m */,
 			);
 			name = WebService;
 			sourceTree = "<group>";
@@ -330,8 +330,8 @@
 				26B7BBD717B551430078636E /* XmlParseHelper.m in Sources */,
 				26B7BBDE17B551E30078636E /* ServiceHelper.m in Sources */,
 				26B7BBDF17B551E30078636E /* ServiceArgs.m in Sources */,
-				26B7BBE017B551E30078636E /* ServiceResult.m in Sources */,
 				26B7BBE417B556330078636E /* ViewController.m in Sources */,
+				26A6DF7A17BA7E4B0068CDEB /* ServiceResult.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

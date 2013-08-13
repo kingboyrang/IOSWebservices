@@ -7,17 +7,18 @@
 //
 
 #import <Foundation/Foundation.h>
-@class ASIHTTPRequest;
-@class XmlParseHelper;
+#import "ASIHTTPRequest.h"
+#import "XmlParseHelper.h"
 @interface ServiceResult : NSObject
 @property(nonatomic,retain) ASIHTTPRequest *request;
-@property(nonatomic,retain) NSDictionary *userInfo;
+@property(nonatomic,readonly) NSDictionary *userInfo;
+@property(nonatomic,readonly) NSString *nameSpace;
+@property(nonatomic,readonly) NSString *methodName;
 //xml转换类
 @property(nonatomic,retain) XmlParseHelper *xmlParse;
 //原始返回的soap字符串
-@property(nonatomic,copy) NSString *xmlString;
+@property(nonatomic,readonly) NSString *xmlString;
 //调用webservice方法里面的值
 @property(nonatomic,copy) NSString *xmlValue;
-
 +(id)requestResult:(ASIHTTPRequest*)httpRequest;
 @end
