@@ -8,7 +8,7 @@ libxml2.dylib<br/>
 CFNetwork.framework<br/>
 SystemConfiguration.framework<br/>
 
-2.设置
+2.libxml2.dylib类库设置
 ------------
 (1)Project->Edit Project Seeting->切换到buddle选项卡->在seetings中<br/>
 (2)查找到Search paths中的Header Search Paths 点击它添加${SDKROOT}/usr/include/libxml2<br/>
@@ -21,10 +21,10 @@ SystemConfiguration.framework<br/>
 ------------
 (1)同步请求<br/>
 a.无参数的同步请求<br/>
-  ServiceResult *result=[ServiceHelper syncMethodName:@"getForexRmbRate"];
-    NSLog(@"同步请求xml=%@\n",result.xmlString);
-    NSArray *arr=[result.xmlParse soapXmlSelectNodes:@"//ForexRmbRate"];
-    NSLog(@"解析xml结果=%@\n",arr);
+  ServiceResult *result=[ServiceHelper syncMethodName:@"getForexRmbRate"];<br/>
+    NSLog(@"同步请求xml=%@\n",result.xmlString);<br/>
+    NSArray *arr=[result.xmlParse soapXmlSelectNodes:@"//ForexRmbRate"];<br/>
+    NSLog(@"解析xml结果=%@\n",arr);<br/>
 b.有参数的同步请求
  //参数
 NSMutableArray *params=[NSMutableArray array];
