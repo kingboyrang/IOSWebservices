@@ -19,15 +19,13 @@ SystemConfiguration.framework<br/>
 
 4.使用说明
 ------------
-(1)同步请求<br/>
+### (1)同步请求<br/>
 a.无参数的同步请求<br/>
-###
   ServiceResult *result=[ServiceHelper syncMethodName:@"getForexRmbRate"];<br/>
     NSLog(@"同步请求xml=%@\n",result.xmlString);<br/>
     NSArray *arr=[result.xmlParse soapXmlSelectNodes:@"//ForexRmbRate"];<br/>
     NSLog(@"解析xml结果=%@\n",arr);<br/>
 b.有参数的同步请求
-###
  //参数
 NSMutableArray *params=[NSMutableArray array];
 [params addObject:[NSDictionary dictionaryWithObjectsAndKeys:@"queryBFlist",@"tradeCode", nil]];
@@ -45,7 +43,7 @@ NSLog(@"同步请求xml=%@\n",result.xmlString);
 //查询节点
 NSArray *arr=[result.xmlParse soapXmlSelectNodes:@"//ForexRmbRate"];    
 NSLog(@"解析xml结果=%@\n",arr);
-(2)异步请求
+### (2)异步请求
 a.无参数的异步请求
  [ServiceHelper asynMethodName:@"getForexRmbRate" completed:^(ServiceResult *result) {
         //查询xml节点
