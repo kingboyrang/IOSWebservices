@@ -80,3 +80,6 @@ args.soapParams=params;//方法参数
         NSLog(@"error=%@\n",[error description]);
     }]; 
 </code></pre>
+### (3)队列请求<br/>
+### (4)直接设置url与命名空间请求<br/>
+
