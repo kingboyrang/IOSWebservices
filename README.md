@@ -81,5 +81,44 @@ args.soapParams=params;//方法参数
     }]; 
 </code></pre>
 ### (3)队列请求<br/>
+<pre><code>
+ServiceHelper *helper=[ServiceHelper sharedInstance];
+    //添加队列1
+    ASIHTTPRequest *request1=[ServiceHelper commonSharedRequest:[ServiceArgs serviceMethodName:@"getForexRmbRate"]];
+    [request1 setUserInfo:[NSDictionary dictionaryWithObjectsAndKeys:@"request1",@"name", nil]];
+    [helper addQueue:request1];
+    //添加队列2
+    ServiceArgs *args1=[[[ServiceArgs alloc] init] autorelease];
+    args1.serviceURL=@"http://webservice.webxml.com.cn/WebServices/MobileCodeWS.asmx";
+    args1.serviceNameSpace=@"http://WebXml.com.cn/";
+    args1.methodName=@"getDatabaseInfo";
+    ASIHTTPRequest *request2=[ServiceHelper commonSharedRequest:args1];
+    [request1 setUserInfo:[NSDictionary dictionaryWithObjectsAndKeys:@"request2",@"name", nil]];
+    [helper addQueue:request2];
+
+    //执行队列
+    [helper startQueue:^(ServiceResult *result) {
+        NSString *name=[result.userInfo objectForKey:@"name"];
+        NSLog(@"%@请求成功，xml=%@",name,result.xmlString);
+    } failed:^(NSError *error, NSDictionary *userInfo) {
+        NSString *name=[userInfo objectForKey:@"name"];
+        NSLog(@"%@请求失败，失败原因:%@",name,[error description]);
+    } complete:^{
+         NSLog(@"排队列请求完成！\n");
+    }];
+</code></pre>
 ### (4)直接设置url与命名空间请求<br/>
+<pre><code>
+ServiceArgs *args1=[[[ServiceArgs alloc] init] autorelease];
+args1.serviceURL=@"http://webservice.webxml.com.cn/WebServices/MobileCodeWS.asmx";//webservice地址
+args1.serviceNameSpace=@"http://WebXml.com.cn/";//webservice命名空间
+args1.methodName=@"getDatabaseInfo";
+//调用
+[ServiceHelper asynService:args1 completed:^(ServiceResult *result) {        
+   NSLog(@"xml结果=%@\n",result.XMLString);
+} 
+failed:^(NSError *error, NSDictionary *userInfo) {
+    NSLog(@"error=%@\n",[error description]);
+}];
+</code></pre>
 
