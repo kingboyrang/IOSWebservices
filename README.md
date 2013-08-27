@@ -8,8 +8,10 @@ libxml2.dylib<br/>
 CFNetwork.framework<br/>
 SystemConfiguration.framework<br/>
 
-2.Project->Edit Project Seeting->切换到buddle选项卡->在seetings中<br/>
-(1)查找到Search paths中的Header Search Paths 点击它添加${SDKROOT}/usr/include/libxml2<br/>
+2.设置
+------------
+(1)Project->Edit Project Seeting->切换到buddle选项卡->在seetings中<br/>
+(2)查找到Search paths中的Header Search Paths 点击它添加${SDKROOT}/usr/include/libxml2<br/>
 
 3.修改webservice访问配置
 ------------
