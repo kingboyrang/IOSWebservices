@@ -22,12 +22,13 @@ SystemConfiguration.framework<br/>
 ### (1)同步请求<br/>
 a.无参数的同步请求<br/>
 <pre><code>
-  ServiceResult *result=[ServiceHelper syncMethodName:@"getForexRmbRate"];<br/>
-    NSLog(@"同步请求xml=%@\n",result.xmlString);<br/>
-    NSArray *arr=[result.xmlParse soapXmlSelectNodes:@"//ForexRmbRate"];<br/>
-    NSLog(@"解析xml结果=%@\n",arr);<br/>
+  ServiceResult *result=[ServiceHelper syncMethodName:@"getForexRmbRate"];
+    NSLog(@"同步请求xml=%@\n",result.xmlString);
+    NSArray *arr=[result.xmlParse soapXmlSelectNodes:@"//ForexRmbRate"];
+    NSLog(@"解析xml结果=%@\n",arr);
 </code></pre>
 b.有参数的同步请求
+<pre><code>
  //参数
 NSMutableArray *params=[NSMutableArray array];
 [params addObject:[NSDictionary dictionaryWithObjectsAndKeys:@"queryBFlist",@"tradeCode", nil]];
@@ -47,6 +48,7 @@ NSArray *arr=[result.xmlParse soapXmlSelectNodes:@"//ForexRmbRate"];
 NSLog(@"解析xml结果=%@\n",arr);
 ### (2)异步请求
 a.无参数的异步请求
+<pre><code>
  [ServiceHelper asynMethodName:@"getForexRmbRate" completed:^(ServiceResult *result) {
         //查询xml节点
         NSArray *arr=[result.xmlParse soapXmlSelectNodes:@"//ForexRmbRate"];
@@ -54,7 +56,9 @@ a.无参数的异步请求
     } failed:^(NSError *error, NSDictionary *userInfo) {
         NSLog(@"error=%@\n",[error description]);
     }];
+</code></pre>
 b.有参数的异步请求
+<pre><code>
 //参数
 NSMutableArray *params=[NSMutableArray array];
 [params addObject:[NSDictionary dictionaryWithObjectsAndKeys:@"queryBFlist",@"tradeCode", nil]];
@@ -74,3 +78,4 @@ args.soapParams=params;//方法参数
     } failed:^(NSError *error, NSDictionary *userInfo) {
         NSLog(@"error=%@\n",[error description]);
     }]; 
+</code></pre>
