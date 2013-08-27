@@ -21,11 +21,12 @@ SystemConfiguration.framework<br/>
 ------------
 ### (1)同步请求<br/>
 a.无参数的同步请求<br/>
-###Color
+<pre><code>
   ServiceResult *result=[ServiceHelper syncMethodName:@"getForexRmbRate"];<br/>
     NSLog(@"同步请求xml=%@\n",result.xmlString);<br/>
     NSArray *arr=[result.xmlParse soapXmlSelectNodes:@"//ForexRmbRate"];<br/>
     NSLog(@"解析xml结果=%@\n",arr);<br/>
+</code></pre>
 b.有参数的同步请求
  //参数
 NSMutableArray *params=[NSMutableArray array];
