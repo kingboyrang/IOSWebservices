@@ -1,21 +1,21 @@
 IOSWebservices
 ==============
-1.添加类库引用
-libz.dylib
-MobileCoreServices.framework
-libxml2.dylib
-CFNetwork.framework
-SystemConfiguration.framework
+1.添加类库引用<br/>
+libz.dylib<br/>
+MobileCoreServices.framework<br/>
+libxml2.dylib<br/>
+CFNetwork.framework<br/>
+SystemConfiguration.framework<br/>
 
-2.Project->Edit Project Seeting->切换到buddle选项卡->在seetings中
-(1)查找到Search paths中的Header Search Paths 点击它添加${SDKROOT}/usr/include/libxml2
+2.Project->Edit Project Seeting->切换到buddle选项卡->在seetings中<br/>
+(1)查找到Search paths中的Header Search Paths 点击它添加${SDKROOT}/usr/include/libxml2<br/>
 
-3.修改webservice访问配置
-在项目中找到ServiceArgs类，把defaultWebSerivceUrl与defaultWebServiceNameSpace的值修改成自已的内容
+3.修改webservice访问配置<br/>
+在项目中找到ServiceArgs类，把defaultWebSerivceUrl与defaultWebServiceNameSpace的值修改成自已的内容<br/>
 
-4.使用说明
-(1)同步请求
-a.无参数的同步请求
+4.使用说明<br/>
+(1)同步请求<br/>
+a.无参数的同步请求<br/>
 =============================================================================================
   ServiceResult *result=[ServiceHelper syncMethodName:@"getForexRmbRate"];
     NSLog(@"同步请求xml=%@\n",result.xmlString);
