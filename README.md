@@ -46,6 +46,7 @@ NSLog(@"同步请求xml=%@\n",result.xmlString);
 //查询节点
 NSArray *arr=[result.xmlParse soapXmlSelectNodes:@"//ForexRmbRate"];    
 NSLog(@"解析xml结果=%@\n",arr);
+</code></pre>
 ### (2)异步请求
 a.无参数的异步请求
 <pre><code>
