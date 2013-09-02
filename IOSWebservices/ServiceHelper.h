@@ -27,7 +27,7 @@ typedef void (^finishBlockQueueComplete)();
 @end
 
 @interface ServiceHelper : NSObject{
-    
+@private
     finishBlockRequest _finishBlock;
     failedBlockRequest _failedBlock;
     finishBlockQueueComplete _finishQueueBlock;
@@ -58,17 +58,17 @@ typedef void (^finishBlockQueueComplete)();
 /*****异步请求***/
 -(void)asynService:(ServiceArgs*)args;
 -(void)asynService:(ServiceArgs*)args delegate:(id<ServiceHelperDelegate>)theDelegate;
--(void)asynService:(ServiceArgs*)args completed:(finishBlockRequest)finish failed:(failedBlockRequest)failed;
--(void)asynService:(ServiceArgs*)args progress:(progressRequestBlock)progress completed:(finishBlockRequest)finish failed:(failedBlockRequest)failed;
+-(void)asynService:(ServiceArgs*)args success:(finishBlockRequest)finish failed:(failedBlockRequest)failed;
+-(void)asynService:(ServiceArgs*)args progress:(progressRequestBlock)progress success:(finishBlockRequest)finish failed:(failedBlockRequest)failed;
 -(void)asynServiceMethodName:(NSString*)methodName delegate:(id<ServiceHelperDelegate>)theDelegate;
--(void)asynServiceMethodName:(NSString*)methodName completed:(finishBlockRequest)finish failed:(failedBlockRequest)failed;
--(void)asynServiceMethodName:(NSString*)methodName progress:(progressRequestBlock)progress completed:(finishBlockRequest)finish failed:(failedBlockRequest)failed;
+-(void)asynServiceMethodName:(NSString*)methodName success:(finishBlockRequest)finish failed:(failedBlockRequest)failed;
+-(void)asynServiceMethodName:(NSString*)methodName progress:(progressRequestBlock)progress success:(finishBlockRequest)finish failed:(failedBlockRequest)failed;
 +(void)asynService:(ServiceArgs*)args delegate:(id<ServiceHelperDelegate>)theDelegate;
-+(void)asynService:(ServiceArgs*)args completed:(finishBlockRequest)finish failed:(failedBlockRequest)failed;
-+(void)asynService:(ServiceArgs*)args progress:(progressRequestBlock)progress completed:(finishBlockRequest)finish failed:(failedBlockRequest)failed;
++(void)asynService:(ServiceArgs*)args success:(finishBlockRequest)finish failed:(failedBlockRequest)failed;
++(void)asynService:(ServiceArgs*)args progress:(progressRequestBlock)progress success:(finishBlockRequest)finish failed:(failedBlockRequest)failed;
 +(void)asynMethodName:(NSString*)methodName delegate:(id<ServiceHelperDelegate>)theDelegate;
-+(void)asynMethodName:(NSString*)methodName completed:(finishBlockRequest)finish failed:(failedBlockRequest)failed;
-+(void)asynMethodName:(NSString*)methodName progress:(progressRequestBlock)progress completed:(finishBlockRequest)finish failed:(failedBlockRequest)failed;
++(void)asynMethodName:(NSString*)methodName success:(finishBlockRequest)finish failed:(failedBlockRequest)failed;
++(void)asynMethodName:(NSString*)methodName progress:(progressRequestBlock)progress success:(finishBlockRequest)finish failed:(failedBlockRequest)failed;
 /*****队列请求***/
 -(void)addQueue:(ASIHTTPRequest*)request;
 -(void)addRangeQueue:(NSArray*)requests;

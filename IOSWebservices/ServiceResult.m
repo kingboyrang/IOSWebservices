@@ -8,10 +8,14 @@
 
 #import "ServiceResult.h"
 @implementation ServiceResult
-@synthesize request,userInfo;
+@synthesize request;
+@synthesize userInfo;
 @synthesize xmlParse;
-@synthesize xmlValue,xmlString;
-@synthesize nameSpace,methodName;
+@synthesize xmlString;
+@synthesize xmlValue;
+@synthesize nameSpace;
+@synthesize methodName;
+@synthesize xmlnsAttr;
 -(NSString*)nameSpace{
     if (!nameSpace) {
         if (self.request) {
@@ -61,6 +65,9 @@
         }
     }
     return xmlString;
+}
+-(NSString*)xmlnsAttr{
+    return [NSString stringWithFormat:@"xmlns=\"%@\"",[self nameSpace]];
 }
 +(id)requestResult:(ASIHTTPRequest*)httpRequest{
     ServiceResult *entity=[[ServiceResult alloc] init];

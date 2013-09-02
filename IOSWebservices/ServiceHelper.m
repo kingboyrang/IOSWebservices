@@ -186,10 +186,10 @@
     self.delegate=theDelegate;
     [self asynService:args];
 }
--(void)asynService:(ServiceArgs*)args completed:(finishBlockRequest)finish failed:(failedBlockRequest)failed{
-    [self asynService:args progress:nil completed:finish failed:failed];
+-(void)asynService:(ServiceArgs*)args success:(finishBlockRequest)finish failed:(failedBlockRequest)failed{
+    [self asynService:args progress:nil success:finish failed:failed];
 }
--(void)asynService:(ServiceArgs*)args progress:(progressRequestBlock)progress completed:(finishBlockRequest)finish failed:(failedBlockRequest)failed{
+-(void)asynService:(ServiceArgs*)args progress:(progressRequestBlock)progress success:(finishBlockRequest)finish failed:(failedBlockRequest)failed{
         Block_release(_progressBlock);
         _progressBlock=Block_copy(progress);
    
@@ -205,12 +205,12 @@
     ServiceArgs *args=[ServiceArgs serviceMethodName:methodName];
     [self asynService:args delegate:theDelegate];
 }
--(void)asynServiceMethodName:(NSString*)methodName completed:(finishBlockRequest)finish failed:(failedBlockRequest)failed{
-    [self asynServiceMethodName:methodName progress:nil completed:finish failed:failed];
+-(void)asynServiceMethodName:(NSString*)methodName success:(finishBlockRequest)finish failed:(failedBlockRequest)failed{
+    [self asynServiceMethodName:methodName progress:nil success:finish failed:failed];
 }
--(void)asynServiceMethodName:(NSString*)methodName progress:(progressRequestBlock)progress completed:(finishBlockRequest)finish failed:(failedBlockRequest)failed{
+-(void)asynServiceMethodName:(NSString*)methodName progress:(progressRequestBlock)progress success:(finishBlockRequest)finish failed:(failedBlockRequest)failed{
     ServiceArgs *args=[ServiceArgs serviceMethodName:methodName];
-    [self asynService:args progress:progress completed:finish failed:failed];
+    [self asynService:args progress:progress success:finish failed:failed];
 }
 +(void)asynService:(ServiceArgs*)args delegate:(id<ServiceHelperDelegate>)theDelegate
 {
@@ -218,24 +218,24 @@
     helper.delegate=theDelegate;
     [helper asynService:args];
 }
-+(void)asynService:(ServiceArgs*)args completed:(finishBlockRequest)finish failed:(failedBlockRequest)failed{
-    [ServiceHelper asynService:args progress:nil completed:finish failed:failed];
++(void)asynService:(ServiceArgs*)args success:(finishBlockRequest)finish failed:(failedBlockRequest)failed{
+    [ServiceHelper asynService:args progress:nil success:finish failed:failed];
 }
-+(void)asynService:(ServiceArgs*)args progress:(progressRequestBlock)progress completed:(finishBlockRequest)finish failed:(failedBlockRequest)failed{
++(void)asynService:(ServiceArgs*)args progress:(progressRequestBlock)progress success:(finishBlockRequest)finish failed:(failedBlockRequest)failed{
     ServiceHelper *helper=[ServiceHelper sharedInstance];
-    [helper asynService:args progress:progress completed:finish failed:failed];
+    [helper asynService:args progress:progress success:finish failed:failed];
 }
 +(void)asynMethodName:(NSString*)methodName delegate:(id<ServiceHelperDelegate>)theDelegate{
       ServiceHelper *helper=[ServiceHelper sharedInstance];
       [helper asynServiceMethodName:methodName delegate:theDelegate];
 }
-+(void)asynMethodName:(NSString*)methodName completed:(finishBlockRequest)finish failed:(failedBlockRequest)failed{
-    [self asynMethodName:methodName progress:nil completed:finish failed:failed];
++(void)asynMethodName:(NSString*)methodName success:(finishBlockRequest)finish failed:(failedBlockRequest)failed{
+    [self asynMethodName:methodName progress:nil success:finish failed:failed];
 }
-+(void)asynMethodName:(NSString*)methodName progress:(progressRequestBlock)progress completed:(finishBlockRequest)finish failed:(failedBlockRequest)failed{
++(void)asynMethodName:(NSString*)methodName progress:(progressRequestBlock)progress success:(finishBlockRequest)finish failed:(failedBlockRequest)failed{
      ServiceHelper *helper=[ServiceHelper sharedInstance];
      ServiceArgs *args=[ServiceArgs serviceMethodName:methodName];
-    [helper asynService:args progress:progress completed:finish failed:failed];
+    [helper asynService:args progress:progress success:finish failed:failed];
 }
 #pragma mark -
 #pragma mark ASIHTTPRequest delegate Methods

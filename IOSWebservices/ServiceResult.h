@@ -14,6 +14,7 @@
 @property(nonatomic,readonly) NSDictionary *userInfo;
 @property(nonatomic,readonly) NSString *nameSpace;
 @property(nonatomic,readonly) NSString *methodName;
+@property(nonatomic,readonly) NSString *xmlnsAttr;
 //xml转换类
 @property(nonatomic,retain) XmlParseHelper *xmlParse;
 //原始返回的soap字符串
