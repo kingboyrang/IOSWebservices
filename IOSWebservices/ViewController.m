@@ -107,6 +107,7 @@
     NSLog(@"同步请求xml=%@\n",result);
     NSArray *arr=[result.xmlParse soapXmlSelectNodes:@"//ForexRmbRate"];
     NSLog(@"解析xml结果=%@\n",arr);
+   
     
 }
 //异步请求deletegated

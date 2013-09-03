@@ -335,8 +335,9 @@
 #pragma mark 私有方法
 -(NSString*)soapAction:(NSString*)namespace methodName:(NSString*)methodName{
     NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"/$" options:0 error:nil];
-    NSArray *array=[regex matchesInString:namespace options:0 range:NSMakeRange(0, [namespace length])];
-    if(array&&[array count]>0){
+    NSUInteger numberOfMatches = [regex numberOfMatchesInString:namespace options:0 range:NSMakeRange(0, [namespace length])];
+    //NSArray *array=[regex matchesInString:namespace options:0 range:NSMakeRange(0, [namespace length])];
+    if(numberOfMatches>0){
         return [NSString stringWithFormat:@"%@%@",namespace,methodName];
     }
     return [NSString stringWithFormat:@"%@/%@",namespace,methodName];
