@@ -89,11 +89,25 @@
 }
 //同步请求
 - (IBAction)SyncClick:(id)sender {
-    
+    /***
+    NSMutableArray *params=[NSMutableArray array];
+    [params addObject:[NSDictionary dictionaryWithObjectsAndKeys:@"道道香食府",@"userName", nil]];
+    [params addObject:[NSDictionary dictionaryWithObjectsAndKeys:@"123456",@"passWord", nil]];
+    ServiceArgs *args1=[[[ServiceArgs alloc] init] autorelease];
+    args1.serviceURL=@"http://117.27.136.236:9000/WebServer/Phone/PHoneWebServer.asmx";
+    args1.serviceNameSpace=@"http://www.race.net.cn";
+    args1.methodName=@"EnterpriseLogin";
+    args1.soapParams=params;
+    NSLog(@"soap=%@\n",args1.soapMessage);
+    ServiceResult *result=[ServiceHelper syncService:args1];
+    NSLog(@"xml=%@\n",[result.request responseString]);
+    ***/
+  
     ServiceResult *result=[ServiceHelper syncMethodName:@"getForexRmbRate"];
     NSLog(@"同步请求xml=%@\n",result);
     NSArray *arr=[result.xmlParse soapXmlSelectNodes:@"//ForexRmbRate"];
     NSLog(@"解析xml结果=%@\n",arr);
+    
 }
 //异步请求deletegated
 - (IBAction)asyncDelegatedClick:(id)sender {
@@ -103,7 +117,7 @@
 //异步请求block
 - (IBAction)asyncBlockClick:(id)sender {
     NSLog(@"异步请求block\n");
-    [ServiceHelper asynMethodName:@"getForexRmbRate" completed:^(ServiceResult *result) {
+    [ServiceHelper asynMethodName:@"getForexRmbRate" success:^(ServiceResult *result) {
         NSArray *arr=[result.xmlParse soapXmlSelectNodes:@"//ForexRmbRate"];
         NSLog(@"解析xml结果=%@\n",arr);
 

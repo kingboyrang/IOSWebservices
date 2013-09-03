@@ -11,6 +11,7 @@
 @interface ServiceHelper()
 //重设队列
 -(void)resetQueue;
+-(NSString*)soapAction:(NSString*)namespace methodName:(NSString*)methodName;
 @end
 
 @implementation ServiceHelper
@@ -51,7 +52,7 @@
 	[request addRequestHeader:@"Host" value:[args.webURL host]];
     [request addRequestHeader:@"Content-Type" value:@"text/xml; charset=utf-8"];
 	[request addRequestHeader:@"Content-Length" value:msgLength];
-    [request addRequestHeader:@"SOAPAction" value:[NSString stringWithFormat:@"%@%@",args.serviceNameSpace,args.methodName]];
+    [request addRequestHeader:@"SOAPAction" value:[self soapAction:args.serviceNameSpace methodName:args.methodName]];
     [request setRequestMethod:@"POST"];
     //设置用户信息
     //[request setUserInfo:[NSDictionary dictionaryWithObjectsAndKeys:args.methodName,@"name", nil]];
@@ -63,24 +64,8 @@
     return request;
 }
 +(ASIHTTPRequest*)commonSharedRequest:(ServiceArgs*)args{
-    ASIHTTPRequest *request=[ASIHTTPRequest requestWithURL:args.webURL];
-    NSString *msgLength = [NSString stringWithFormat:@"%d", [args.soapMessage length]];
-	
-    //以下对请求信息添加属性前四句是必有的，第五句是soap信息。
-	[request addRequestHeader:@"Host" value:[args.webURL host]];
-    [request addRequestHeader:@"Content-Type" value:@"text/xml; charset=utf-8"];
-	[request addRequestHeader:@"Content-Length" value:msgLength];
-    [request addRequestHeader:@"SOAPAction" value:[NSString stringWithFormat:@"%@%@",args.serviceNameSpace,args.methodName]];
-    [request setRequestMethod:@"POST"];
-    //设置用户信息
-    //[request setUserInfo:[NSDictionary dictionaryWithObjectsAndKeys:methosName,@"name", nil]];
-	//传soap信息
-    [request appendPostData:[args.soapMessage dataUsingEncoding:NSUTF8StringEncoding]];
-    [request setValidatesSecureCertificate:NO];
-    [request setTimeOutSeconds:30.0];//表示30秒请超时
-    [request setDefaultResponseEncoding:NSUTF8StringEncoding];
-    return request;
-
+    ServiceHelper *helper=[[[ServiceHelper alloc] init] autorelease];
+    return [helper commonSharedRequest:args];
 }
 #pragma mark -
 #pragma mark 同步请求
@@ -98,7 +83,7 @@
 	[self.httpRequest addRequestHeader:@"Host" value:[args.webURL host]];
     [self.httpRequest addRequestHeader:@"Content-Type" value:@"text/xml; charset=utf-8"];
 	[self.httpRequest addRequestHeader:@"Content-Length" value:msgLength];
-    [self.httpRequest addRequestHeader:@"SOAPAction" value:[NSString stringWithFormat:@"%@%@",args.serviceNameSpace,args.methodName]];
+    [self.httpRequest addRequestHeader:@"SOAPAction" value:[self soapAction:args.serviceNameSpace methodName:args.methodName]];
     [self.httpRequest setRequestMethod:@"POST"];
     //设置用户信息
     [self.httpRequest setUserInfo:[NSDictionary dictionaryWithObjectsAndKeys:args.methodName,@"name", nil]];
@@ -158,7 +143,7 @@
 	[self.httpRequest addRequestHeader:@"Host" value:[args.webURL host]];
     [self.httpRequest addRequestHeader:@"Content-Type" value:@"text/xml; charset=utf-8"];
 	[self.httpRequest addRequestHeader:@"Content-Length" value:msgLength];
-    [self.httpRequest addRequestHeader:@"SOAPAction" value:[NSString stringWithFormat:@"%@%@",args.serviceNameSpace,args.methodName]];
+    [self.httpRequest addRequestHeader:@"SOAPAction" value:[self soapAction:args.serviceNameSpace methodName:args.methodName]];
     [self.httpRequest setRequestMethod:@"POST"];
     //设置用户信息
     //[self.httpRequest setUserInfo:[NSDictionary dictionaryWithObjectsAndKeys:args.methodName,@"name", nil]];
@@ -346,6 +331,15 @@
     
     [self startQueue];
 
+}
+#pragma mark 私有方法
+-(NSString*)soapAction:(NSString*)namespace methodName:(NSString*)methodName{
+    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"/$" options:0 error:nil];
+    NSArray *array=[regex matchesInString:namespace options:0 range:NSMakeRange(0, [namespace length])];
+    if(array&&[array count]>0){
+        return [NSString stringWithFormat:@"%@%@",namespace,methodName];
+    }
+    return [NSString stringWithFormat:@"%@/%@",namespace,methodName];
 }
 -(void)dealloc{
     Block_release(_failedBlock);

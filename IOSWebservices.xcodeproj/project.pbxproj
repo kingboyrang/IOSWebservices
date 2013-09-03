@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		01E14BD917D5BD1400AC2173 /* ServiceHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 01E14BD817D5BD1400AC2173 /* ServiceHelper.m */; };
+		01E14BDB17D5BD2700AC2173 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01E14BDA17D5BD2700AC2173 /* ViewController.m */; };
 		260C97D517B3AA8800B0848C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 260C97D417B3AA8800B0848C /* UIKit.framework */; };
 		260C97D717B3AA8800B0848C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 260C97D617B3AA8800B0848C /* Foundation.framework */; };
 		260C97D917B3AA8800B0848C /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 260C97D817B3AA8800B0848C /* CoreGraphics.framework */; };
@@ -35,13 +37,14 @@
 		26A6DF7A17BA7E4B0068CDEB /* ServiceResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 26A6DF7917BA7E4B0068CDEB /* ServiceResult.m */; };
 		26AEA71E17B50D1300A7FC6F /* GDataXMLNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 26AEA71D17B50D1300A7FC6F /* GDataXMLNode.m */; };
 		26B7BBD717B551430078636E /* XmlParseHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 26B7BBD617B551430078636E /* XmlParseHelper.m */; };
-		26B7BBDE17B551E30078636E /* ServiceHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 26B7BBD917B551E30078636E /* ServiceHelper.m */; };
 		26B7BBDF17B551E30078636E /* ServiceArgs.m in Sources */ = {isa = PBXBuildFile; fileRef = 26B7BBDB17B551E30078636E /* ServiceArgs.m */; };
-		26B7BBE417B556330078636E /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26B7BBE217B556330078636E /* ViewController.m */; };
 		26B7BBE517B556330078636E /* ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26B7BBE317B556330078636E /* ViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		01E14BD717D5BD1400AC2173 /* ServiceHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceHelper.h; sourceTree = "<group>"; };
+		01E14BD817D5BD1400AC2173 /* ServiceHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceHelper.m; sourceTree = "<group>"; };
+		01E14BDA17D5BD2700AC2173 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		260C97D117B3AA8800B0848C /* IOSWebservices.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IOSWebservices.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		260C97D417B3AA8800B0848C /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		260C97D617B3AA8800B0848C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -92,12 +95,9 @@
 		26AEA72017B50D5500A7FC6F /* GDataTargetNamespace.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDataTargetNamespace.h; sourceTree = "<group>"; };
 		26B7BBD517B551430078636E /* XmlParseHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XmlParseHelper.h; sourceTree = "<group>"; };
 		26B7BBD617B551430078636E /* XmlParseHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XmlParseHelper.m; sourceTree = "<group>"; };
-		26B7BBD817B551E30078636E /* ServiceHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceHelper.h; sourceTree = "<group>"; };
-		26B7BBD917B551E30078636E /* ServiceHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceHelper.m; sourceTree = "<group>"; };
 		26B7BBDA17B551E30078636E /* ServiceArgs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceArgs.h; sourceTree = "<group>"; };
 		26B7BBDB17B551E30078636E /* ServiceArgs.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceArgs.m; sourceTree = "<group>"; };
 		26B7BBE117B556330078636E /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		26B7BBE217B556330078636E /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		26B7BBE317B556330078636E /* ViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -159,7 +159,7 @@
 				260C97E317B3AA8800B0848C /* AppDelegate.h */,
 				260C97E417B3AA8800B0848C /* AppDelegate.m */,
 				26B7BBE117B556330078636E /* ViewController.h */,
-				26B7BBE217B556330078636E /* ViewController.m */,
+				01E14BDA17D5BD2700AC2173 /* ViewController.m */,
 				26B7BBE317B556330078636E /* ViewController.xib */,
 				260C97DB17B3AA8800B0848C /* Supporting Files */,
 			);
@@ -237,10 +237,10 @@
 		260C982517B3ABEA00B0848C /* WebService */ = {
 			isa = PBXGroup;
 			children = (
+				01E14BD717D5BD1400AC2173 /* ServiceHelper.h */,
+				01E14BD817D5BD1400AC2173 /* ServiceHelper.m */,
 				26A6DF7817BA7E4B0068CDEB /* ServiceResult.h */,
 				26A6DF7917BA7E4B0068CDEB /* ServiceResult.m */,
-				26B7BBD817B551E30078636E /* ServiceHelper.h */,
-				26B7BBD917B551E30078636E /* ServiceHelper.m */,
 				26B7BBDA17B551E30078636E /* ServiceArgs.h */,
 				26B7BBDB17B551E30078636E /* ServiceArgs.m */,
 			);
@@ -328,10 +328,10 @@
 				260C982817B3AC0300B0848C /* XmlNode.m in Sources */,
 				26AEA71E17B50D1300A7FC6F /* GDataXMLNode.m in Sources */,
 				26B7BBD717B551430078636E /* XmlParseHelper.m in Sources */,
-				26B7BBDE17B551E30078636E /* ServiceHelper.m in Sources */,
 				26B7BBDF17B551E30078636E /* ServiceArgs.m in Sources */,
-				26B7BBE417B556330078636E /* ViewController.m in Sources */,
 				26A6DF7A17BA7E4B0068CDEB /* ServiceResult.m in Sources */,
+				01E14BD917D5BD1400AC2173 /* ServiceHelper.m in Sources */,
+				01E14BDB17D5BD2700AC2173 /* ViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -410,6 +410,7 @@
 				GCC_PREFIX_HEADER = "IOSWebservices/IOSWebservices-Prefix.pch";
 				HEADER_SEARCH_PATHS = "${SDKROOT}/usr/include/libxml2";
 				INFOPLIST_FILE = "IOSWebservices/IOSWebservices-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -422,6 +423,7 @@
 				GCC_PREFIX_HEADER = "IOSWebservices/IOSWebservices-Prefix.pch";
 				HEADER_SEARCH_PATHS = "${SDKROOT}/usr/include/libxml2";
 				INFOPLIST_FILE = "IOSWebservices/IOSWebservices-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
