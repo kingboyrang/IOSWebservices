@@ -50,7 +50,7 @@ NSLog(@"解析xml结果=%@\n",arr);
 ### (2)异步请求
 a.无参数的异步请求
 <pre><code>
- [ServiceHelper asynMethodName:@"getForexRmbRate" completed:^(ServiceResult *result) {
+ [ServiceHelper asynMethodName:@"getForexRmbRate" success:^(ServiceResult *result) {
         //查询xml节点
         NSArray *arr=[result.xmlParse soapXmlSelectNodes:@"//ForexRmbRate"];
         NSLog(@"解析xml结果=%@\n",arr);
@@ -72,7 +72,7 @@ ServiceArgs *args=[[[ServiceArgs alloc] init] autorelease];
 args.methodName=@"AddMethod";//webservice方法名
 args.soapParams=params;//方法参数
 //调用
-[ServiceHelper asynService:args completed:^(ServiceResult *result) {
+[ServiceHelper asynService:args success:^(ServiceResult *result) {
        NSArray *arr=[result.xmlParse soapXmlSelectNodes:@"//ForexRmbRate"];
         NSLog(@"解析xml结果=%@\n",arr);
         
@@ -114,7 +114,7 @@ args1.serviceURL=@"http://webservice.webxml.com.cn/WebServices/MobileCodeWS.asmx
 args1.serviceNameSpace=@"http://WebXml.com.cn/";//webservice命名空间
 args1.methodName=@"getDatabaseInfo";
 //调用
-[ServiceHelper asynService:args1 completed:^(ServiceResult *result) {        
+[ServiceHelper asynService:args1 success:^(ServiceResult *result) {        
    NSLog(@"xml结果=%@\n",result.XMLString);
 } 
 failed:^(NSError *error, NSDictionary *userInfo) {
