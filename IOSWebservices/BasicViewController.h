@@ -15,20 +15,20 @@
 -(AnimateErrorView*) successView;
 -(AnimateLoadView*) loadingView;
 -(void) showLoadingAnimatedWithTitle:(NSString*)title;
--(void) showLoadingAnimated:(void (^)(AnimateLoadView *errorView))process;
+-(void) showLoadingAnimated:(void (^)(AnimateLoadView *loadView))process;
 -(void) hideLoadingViewAnimated:(void (^)(AnimateLoadView *hideView))complete;
-//-(void) hideLoadingWithSuccessTitle:(NSString*)title completed:(void(^)())complete;
--(void) hideLoadingSuccessWithTitle:(NSString*)title completed:(void (^)(AnimateErrorView *errorView))complete;
+-(void) hideLoadingSuccessWithTitle:(NSString*)title completed:(void (^)(AnimateErrorView *successView))complete;
+-(void) hideLoadingFailedWithTitle:(NSString*)title completed:(void (^)(AnimateErrorView *failedView))complete;
 
 -(void) showErrorViewAnimated:(void (^)(AnimateErrorView *errorView))process;
 -(void) hideErrorViewAnimatedWithDuration:(NSTimeInterval)duration completed:(void (^)(AnimateErrorView *errorView))complete;
 -(void) hideErrorViewAnimated:(void (^)(AnimateErrorView *errorView))complete;
 -(void) showErrorViewWithHide:(void (^)(AnimateErrorView *errorView))process completed:(void (^)(AnimateErrorView *errorView))complete;
--(void) hideLoadingFailedWithTitle:(NSString*)title completed:(void (^)(AnimateErrorView *errorView))complete;
 
--(void) showSuccessViewAnimated:(void (^)(AnimateErrorView *errorView))process;
--(void) hideSuccessViewAnimated:(void (^)(AnimateErrorView *errorView))complete;
--(void) showSuccessViewWithHide:(void (^)(AnimateErrorView *errorView))process completed:(void (^)(AnimateErrorView *errorView))complete;
+
+-(void) showSuccessViewAnimated:(void (^)(AnimateErrorView *successView))process;
+-(void) hideSuccessViewAnimated:(void (^)(AnimateErrorView *successView))complete;
+-(void) showSuccessViewWithHide:(void (^)(AnimateErrorView *successView))process completed:(void (^)(AnimateErrorView *successView))complete;
 
 
 @end
