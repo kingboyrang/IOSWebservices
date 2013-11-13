@@ -8,8 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "ServiceHelper.h"
-
-@interface ViewController : UIViewController<ServiceHelperDelegate>
+#import "BasicViewController.h"
+@interface ViewController : BasicViewController<ServiceHelperDelegate>{
+    ServiceHelper *_helper;
+}
 - (IBAction)SyncClick:(id)sender;
 - (IBAction)asyncDelegatedClick:(id)sender;
 - (IBAction)asyncBlockClick:(id)sender;

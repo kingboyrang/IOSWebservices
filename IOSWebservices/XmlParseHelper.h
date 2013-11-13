@@ -7,9 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "XmlNode.h"
 @class GDataXMLNode;
 @class GDataXMLDocument;
-@class XmlNode;
 @interface XmlParseHelper : NSObject
 
 @property(nonatomic,retain) GDataXMLDocument *document;
@@ -44,4 +44,10 @@
 -(NSString*)selectSingleNodeValue:(NSString*)xpath nameSpaces:(NSDictionary*)spaces;
 -(NSArray*)selectNodeValues:(NSString*)xpath;
 -(NSArray*)selectNodeValues:(NSString*)xpath nameSpaces:(NSDictionary*)spaces;
+
+-(NSArray*)childNodesToObject:(NSString*)className;
+-(NSArray*)childNodesToArray;
+//辅助方法
+-(id)childsNodeToObject:(GDataXMLNode*)node objectName:(NSString*)className;
+-(NSArray*)nodesChildsNodesToObjects:(GDataXMLNode*)node objectName:(NSString*)className;
 @end

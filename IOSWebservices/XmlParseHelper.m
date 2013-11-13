@@ -16,7 +16,7 @@
 -(NSString*)getInnerXml:(GDataXMLNode*)node;
 -(NSArray*)getChildNodes:(GDataXMLNode*)parentNode parent:(XmlNode*)parent;
 -(NSMutableDictionary*)childsNodeToDictionary:(GDataXMLNode*)node;
--(id)childsNodeToObject:(GDataXMLNode*)node objectName:(NSString*)className;
+
 -(GDataXMLDocument*)xmlDocumentObject:(id)data;
 -(GDataXMLNode*)getSingleNode:(NSString*)xpath;
 -(GDataXMLNode*)getSingleNode:(NSString*)xpath nameSpaces:(NSDictionary*)spaces;
@@ -47,7 +47,7 @@
         }
     }
     return @"";
-    /****
+    /***
     if (self.document) {
         GDataXMLElement *root=[self.document rootElement];
         NSString *searchStr=[NSString stringWithFormat:@"%@Result",methodName];
@@ -89,7 +89,7 @@
             entity.InnerXml=[self getInnerXml:node];
             entity.OuterXml=node.XMLString;
             entity.ChildNodes=[self getChildNodes:node parent:entity];
-            return [entity autorelease];
+            return entity;
     }
     return nil;
 }
@@ -138,6 +138,14 @@
         return [self childsNodeToObject:node objectName:className];
     }
     return nil;
+}
+-(NSArray*)nodesChildsNodesToObjects:(GDataXMLNode*)node objectName:(NSString*)className{
+    NSMutableArray *result=[NSMutableArray array];
+    NSArray *childs=[node children];
+    for (GDataXMLNode *item in childs){
+        [result addObject:[self childsNodeToObject:item objectName:className]];
+    }
+    return result;
 }
 -(XmlNode*)soapXmlSelectSingleNode:(NSString*)xpath{
     return [self selectSingleNode:xpath nameSpaces:soapXmlNamespaces];
@@ -216,6 +224,30 @@
             [array addObject:item.stringValue];
         }
         return array;
+    }
+    return nil;
+}
+-(NSArray*)childNodesToObject:(NSString*)className{
+    if (self.document) {
+        GDataXMLElement *root=[self.document rootElement];
+        NSArray *childs=[root children];
+        NSMutableArray *result=[NSMutableArray array];
+        for (GDataXMLNode *item in childs) {
+            [result addObject:[self nodeToObject:item className:className]];
+        }
+        return result;
+    }
+    return nil;
+}
+-(NSArray*)childNodesToArray{
+    if (self.document) {
+        GDataXMLElement *root=[self.document rootElement];
+        NSArray *childs=[root children];
+        NSMutableArray *result=[NSMutableArray array];
+        for (GDataXMLNode *item in childs) {
+            [result addObject:[self childsNodeToDictionary:item]];
+        }
+        return result;
     }
     return nil;
 }
