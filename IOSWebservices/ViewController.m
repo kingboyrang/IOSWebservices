@@ -129,28 +129,16 @@
     [ServiceHelper asynMethodName:@"getForexRmbRate" success:^(ServiceResult *result) {
         BOOL boo=strlen([result.xmlString UTF8String])>0?YES:NO;
         if (boo) {
-            [self hideLoadingViewAnimated:^(AnimateLoadView *hideView) {
-                [self showSuccessViewWithHide:^(AnimateErrorView *errorView) {
-                    errorView.labelTitle.text=@"block请求成功!";
-                } completed:nil];
-            }];
+            [self hideLoadingSuccessWithTitle:@"block请求成功!" completed:nil];
         }else{
-            [self hideLoadingViewAnimated:^(AnimateLoadView *hideView) {
-                [self showErrorViewWithHide:^(AnimateErrorView *errorView) {
-                    errorView.labelTitle.text=@"block请求失败!";
-                } completed:nil];
-            }];
+            [self hideLoadingFailedWithTitle:@"block请求失败!" completed:nil];
         }
         
         NSArray *arr=[result.xmlParse soapXmlSelectNodes:@"//ForexRmbRate"];
         NSLog(@"解析xml结果=%@\n",arr);
     } failed:^(NSError *error, NSDictionary *userInfo) {
         NSLog(@"error=%@\n",[error description]);
-        [self hideLoadingViewAnimated:^(AnimateLoadView *hideView) {
-            [self showErrorViewWithHide:^(AnimateErrorView *errorView) {
-                errorView.labelTitle.text=@"block请求失败!";
-            } completed:nil];
-        }];
+        [self hideLoadingFailedWithTitle:@"block请求失败!" completed:nil];
 
     }];
 }
@@ -198,25 +186,13 @@
     NSLog(@"解析xml结果=%@\n",arr);
     BOOL boo=strlen([result.xmlString UTF8String])>0?YES:NO;
     if (boo) {
-        [self hideLoadingViewAnimated:^(AnimateLoadView *hideView) {
-            [self showSuccessViewWithHide:^(AnimateErrorView *errorView) {
-                errorView.labelTitle.text=@"deletegated请求成功!";
-            } completed:nil];
-        }];
+        [self hideLoadingSuccessWithTitle:@"deletegated请求成功!" completed:nil];
     }else{
-        [self hideLoadingViewAnimated:^(AnimateLoadView *hideView) {
-            [self showErrorViewWithHide:^(AnimateErrorView *errorView) {
-                errorView.labelTitle.text=@"deletegated请求失败!";
-            } completed:nil];
-        }];
+        [self hideLoadingFailedWithTitle:@"deletegated请求失败!" completed:nil];
     }
 }
 -(void)failedSoapRequest:(NSError*)error userInfo:(NSDictionary*)dic{
  NSLog(@"error=%@\n",[error description]);
-    [self hideLoadingViewAnimated:^(AnimateLoadView *hideView) {
-        [self showErrorViewWithHide:^(AnimateErrorView *errorView) {
-            errorView.labelTitle.text=@"deletegated请求失败!";
-        } completed:nil];
-    }];
+   [self hideLoadingFailedWithTitle:@"deletegated请求失败!" completed:nil];
 }
 @end

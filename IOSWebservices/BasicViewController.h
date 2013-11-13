@@ -17,6 +17,8 @@
 -(void) showLoadingAnimatedWithTitle:(NSString*)title;
 -(void) showLoadingAnimated:(void (^)(AnimateLoadView *errorView))process;
 -(void) hideLoadingViewAnimated:(void (^)(AnimateLoadView *hideView))complete;
+//-(void) hideLoadingWithSuccessTitle:(NSString*)title completed:(void(^)())complete;
+-(void) hideLoadingSuccessWithTitle:(NSString*)title completed:(void (^)(AnimateErrorView *errorView))complete;
 
 -(void) showErrorViewAnimated:(void (^)(AnimateErrorView *errorView))process;
 -(void) hideErrorViewAnimatedWithDuration:(NSTimeInterval)duration completed:(void (^)(AnimateErrorView *errorView))complete;
@@ -27,6 +29,6 @@
 -(void) showSuccessViewAnimated:(void (^)(AnimateErrorView *errorView))process;
 -(void) hideSuccessViewAnimated:(void (^)(AnimateErrorView *errorView))complete;
 -(void) showSuccessViewWithHide:(void (^)(AnimateErrorView *errorView))process completed:(void (^)(AnimateErrorView *errorView))complete;
--(void) hideLoadingSuccessWithTitle:(NSString*)title completed:(void (^)(AnimateErrorView *errorView))complete;
+
 
 @end
