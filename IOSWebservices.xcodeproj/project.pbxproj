@@ -500,7 +500,7 @@
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "IOSWebservices/IOSWebservices-Prefix.pch";
-				HEADER_SEARCH_PATHS = "${SDKROOT}/usr/include/libxml2";
+				HEADER_SEARCH_PATHS = /usr/include/libxml2;
 				INFOPLIST_FILE = "IOSWebservices/IOSWebservices-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -513,7 +513,7 @@
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "IOSWebservices/IOSWebservices-Prefix.pch";
-				HEADER_SEARCH_PATHS = "${SDKROOT}/usr/include/libxml2";
+				HEADER_SEARCH_PATHS = /usr/include/libxml2;
 				INFOPLIST_FILE = "IOSWebservices/IOSWebservices-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";

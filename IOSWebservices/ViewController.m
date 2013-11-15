@@ -21,6 +21,8 @@
     [super viewDidLoad];
     
     _helper=[[ServiceHelper alloc] init];
+    
+    
     //[ServiceHelper syncService:args];
     /********************事项说明*****************************/
     //(1)亲，可以使用XmlParseHelper类去解析返回的xml
@@ -107,14 +109,17 @@
     ***/
   
     /**(2)调用无参数的webservice**/
+    [self showLoadingAnimatedWithTitle:@"正在同步..."];
     ServiceResult *result=[ServiceHelper syncMethodName:@"getForexRmbRate"];
     NSLog(@"同步请求xml=%@\n",result);
+   
     /********[--如果无法解析，请启用以下两句--]**********
      NSString* xml=[result.xmlString stringByReplacingOccurrencesOfString:result.xmlnsAttr withString:@""];
      [result.xmlParse setDataSource:xml];
      ****/
     NSArray *arr=[result.xmlParse soapXmlSelectNodes:@"//ForexRmbRate"];
     NSLog(@"解析xml结果=%@\n",arr);
+    [self hideLoadingSuccessWithTitle:@"同步完成!" completed:nil];
     
 }
 //异步请求deletegated
@@ -126,20 +131,18 @@
 - (IBAction)asyncBlockClick:(id)sender {
     NSLog(@"异步请求block\n");
     [self showLoadingAnimatedWithTitle:@"正在执行异步block请求,请稍等..."];
-    [ServiceHelper asynMethodName:@"getForexRmbRate" success:^(ServiceResult *result) {
+    [_helper asynServiceMethodName:@"getForexRmbRate" success:^(ServiceResult *result) {
         BOOL boo=strlen([result.xmlString UTF8String])>0?YES:NO;
         if (boo) {
             [self hideLoadingSuccessWithTitle:@"block请求成功!" completed:nil];
         }else{
             [self hideLoadingFailedWithTitle:@"block请求失败!" completed:nil];
         }
-        
         NSArray *arr=[result.xmlParse soapXmlSelectNodes:@"//ForexRmbRate"];
         NSLog(@"解析xml结果=%@\n",arr);
     } failed:^(NSError *error, NSDictionary *userInfo) {
         NSLog(@"error=%@\n",[error description]);
         [self hideLoadingFailedWithTitle:@"block请求失败!" completed:nil];
-
     }];
 }
 //队列请求
