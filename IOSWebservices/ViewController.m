@@ -23,6 +23,18 @@
     _helper=[[ServiceHelper alloc] init];
     
     
+    /***
+    ASIHTTPRequest *request=[ASIHTTPRequest requestWithURL:[NSURL URLWithString:@"http://xurrency.com/cny"]];
+    [request setCompletionBlock:^{
+       //去这里下载解析html开源类库＝＝＝》https://github.com/topfunky/hpple
+        NSLog(@"xml=%@\n",request.responseString);
+    }];
+    [request setFailedBlock:^{
+        NSLog(@"error=%@\n",request.error.description);
+    }];
+    [request startAsynchronous];
+    ****/
+    
     //[ServiceHelper syncService:args];
     /********************事项说明*****************************/
     //(1)亲，可以使用XmlParseHelper类去解析返回的xml
@@ -172,8 +184,8 @@
     } failed:^(NSError *error, NSDictionary *userInfo) {
         NSString *name=[userInfo objectForKey:@"name"];
         NSLog(@"%@请求失败，失败原因:%@",name,[error description]);
-    } complete:^{
-         NSLog(@"排队列请求完成！\n");
+    } complete:^(NSArray *results) {
+        NSLog(@"排队列请求完成！\n");
         [self hideLoadingViewAnimated:^(AnimateLoadView *hideView) {
             [self showSuccessViewWithHide:^(AnimateErrorView *errorView) {
                 errorView.labelTitle.text=@"排队列请求完成！";

@@ -16,14 +16,14 @@
 typedef void (^progressRequestBlock)(ASIHTTPRequest *request);
 typedef void (^finishBlockRequest)(ServiceResult *result);
 typedef void (^failedBlockRequest)(NSError *error,NSDictionary *userInfo);
-typedef void (^finishBlockQueueComplete)();
+typedef void (^finishBlockQueueComplete)(NSArray *results);
 //protocol
 @protocol ServiceHelperDelegate<NSObject>
 @optional
 -(void)progressRequest:(ASIHTTPRequest*)request;
 -(void)finishSoapRequest:(ServiceResult*)result;
 -(void)failedSoapRequest:(NSError*)error userInfo:(NSDictionary*)dic;
--(void)finishQueueComplete;
+-(void)finishQueueComplete:(NSArray*)results;
 @end
 
 @interface ServiceHelper : NSObject{
@@ -32,11 +32,13 @@ typedef void (^finishBlockQueueComplete)();
     failedBlockRequest _failedBlock;
     finishBlockQueueComplete _finishQueueBlock;
     progressRequestBlock _progressBlock;
+    
+    NSMutableArray *_queueResults;
+    NSMutableArray *_requestList;
      
 }
 @property(nonatomic,assign) id<ServiceHelperDelegate> delegate;
 @property(nonatomic,retain) ASIHTTPRequest *httpRequest;
-@property(nonatomic,retain) NSMutableArray *requestList;
 @property(nonatomic,retain) ASINetworkQueue *networkQueue;
 //单例模式
 + (ServiceHelper *)sharedInstance;

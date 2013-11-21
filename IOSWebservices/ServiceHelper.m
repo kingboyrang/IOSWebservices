@@ -17,7 +17,7 @@
 
 @implementation ServiceHelper
 @synthesize delegate,httpRequest;
-@synthesize requestList,networkQueue;
+@synthesize networkQueue;
 
 //单例模式
 + (ServiceHelper *)sharedInstance{
@@ -171,6 +171,7 @@
     [self asynService:args progress:nil success:finished failed:failed];
 }
 -(void)asynService:(ServiceArgs*)args progress:(void(^)(ASIHTTPRequest*))progress success:(void(^)(ServiceResult*))finished failed:(void(^)(NSError *error,NSDictionary *userInfo))failed{
+    //__block ASIHTTPRequest *request=[self requestWithServerArgs:args];
     ASIHTTPRequest *request=[self requestWithServerArgs:args];
     if (progress) {
         progress(request);
@@ -265,36 +266,50 @@
 }
 -(void)startQueue{
     [self resetQueue];
-    for (ASIHTTPRequest *item in self.requestList) {
+    for (ASIHTTPRequest *item in _requestList) {
         [self.networkQueue addOperation:item];
     }
     [self.networkQueue go];
 }
 //添加队列
 -(void)addQueue:(ASIHTTPRequest*)request{
-    if (!self.requestList) {
-        self.requestList=[[NSMutableArray alloc] init];
+    if (!_requestList) {
+        _requestList=[[NSMutableArray alloc] init];
+        
+        if (!_queueResults) {
+            _queueResults=[[NSMutableArray alloc] init];
+        }else{
+            [_queueResults removeAllObjects];
+        }
     }
-    [self.requestList addObject:request];
+    [_requestList addObject:request];
     
 }
 -(void)addRangeQueue:(NSArray*)requests{
-    if (!self.requestList) {
-        self.requestList=[[NSMutableArray alloc] init];
+    if (!_requestList) {
+        _requestList=[[NSMutableArray alloc] init];
+        if (!_queueResults) {
+            _queueResults=[[NSMutableArray alloc] init];
+        }else{
+            [_queueResults removeAllObjects];
+        }
     }
-    [self.requestList removeAllObjects];
-    self.requestList=[NSMutableArray arrayWithArray:requests];
+    [_requestList removeAllObjects];
+    _requestList=[NSMutableArray arrayWithArray:requests];
 }
 //队列请求处理
 -(void)queueFetchComplete:(ASIHTTPRequest*)request{
-    if(self.delegate&&[self.delegate respondsToSelector:@selector(finishQueueComplete)]){
-       [self.delegate finishQueueComplete];
+    if(self.delegate&&[self.delegate respondsToSelector:@selector(finishQueueComplete:)]){
+        [self.delegate finishQueueComplete:_queueResults];
     }    
     if (_finishQueueBlock) {
-        _finishQueueBlock();
+        _finishQueueBlock(_queueResults);
     }
-    if (self.requestList) {
-        [self.requestList removeAllObjects];
+    if (_requestList) {
+        [_requestList removeAllObjects];
+    }
+    if (_queueResults) {
+        [_queueResults removeAllObjects];
     }
 }
 -(void)requestFetchComplete:(ASIHTTPRequest*)request{
@@ -305,6 +320,9 @@
     }
     if (_finishBlock) {
         _finishBlock(result);
+    }
+    if (_queueResults) {
+        [_queueResults addObject:result];
     }
     
 }
@@ -348,11 +366,16 @@
     Block_release(_finishBlock);
     Block_release(_finishQueueBlock);
     Block_release(_progressBlock);
-    [requestList release];
     [httpRequest clearDelegatesAndCancel];
     [httpRequest release];
     [networkQueue reset];
     [networkQueue release];
+    if (_requestList) {
+        [_requestList release];
+    }
+    if (_queueResults) {
+        [_queueResults release];
+    }
 	[super dealloc];
 }
 @end
