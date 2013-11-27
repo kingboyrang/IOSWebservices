@@ -18,7 +18,8 @@ SystemConfiguration.framework<br/>
 3.修改webservice访问配置
 ------------
 在项目中找到ServiceArgs类，把defaultWebSerivceUrl与defaultWebServiceNameSpace的值修改成自已的内容<br/>
-
+(1)defaultWebSerivceUrl为webservice url地址<br/>
+(2)defaultWebServiceNameSpace为webservice命名空间地址<br/>
 4.使用说明
 ------------
 ### (1)同步请求<br/>
