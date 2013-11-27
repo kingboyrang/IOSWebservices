@@ -10,8 +10,10 @@ SystemConfiguration.framework<br/>
 
 2.libxml2.dylib类库设置
 ------------
-(1)Project->Edit Project Seeting->切换到buddle选项卡->在seetings中<br/>
+(1)Project->build Setting<br/>
 (2)查找到Search paths中的Header Search Paths 点击它添加${SDKROOT}/usr/include/libxml2<br/>
+
+如果添加了${SDKROOT}/usr/include/libxml2还是会报#import <libxml/tree.h>的错则把它修改成/usr/include/libxml2<br/>
 
 3.修改webservice访问配置
 ------------
