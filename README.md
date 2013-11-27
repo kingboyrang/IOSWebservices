@@ -13,7 +13,7 @@ SystemConfiguration.framework<br/>
 (1)Project->build Setting<br/>
 (2)查找到Search paths中的Header Search Paths 点击它添加${SDKROOT}/usr/include/libxml2<br/>
 
-如果添加了${SDKROOT}/usr/include/libxml2还是会报#import <libxml/tree.h>的错则把它修改成/usr/include/libxml2<br/>
+如果添加了${SDKROOT}/usr/include/libxml2还是会报libxml/tree.h的错则把它修改成/usr/include/libxml2<br/>
 
 3.修改webservice访问配置
 ------------
