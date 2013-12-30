@@ -1,15 +1,20 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<bookstore>
-<book category="CHILDREN">
-   <title>Harry Potter</title>
-   <author>J K. Rowling</author>
-   <year>2008</year>
-   <price>99.99</price>
-</book>
-<book category="WEB">
-   <title>Learning XML</title>
-   <author>Erik T. Ray</author>
-   <year>2008</year>
-   <price>88.8</price>
-</book>
-</bookstore>
+<soapenv:Envelope
+    xmlns:q0="http://webservice.modules.springside.org"
+    xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <soapenv:Header>
+        <authHeader>
+            <userId>wanfang</userId>
+            <userPass>wanfang</userPass>
+        </authHeader>
+    </soapenv:Header>
+    <soapenv:Body>
+        <q0:simpleQuery>
+            <queryString>法律</queryString>
+            <section>all</section>
+            <pageNo>1</pageNo>
+        </q0:simpleQuery>
+    </soapenv:Body>  
+</soapenv:Envelope>

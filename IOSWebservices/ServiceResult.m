@@ -69,6 +69,45 @@
 -(NSString*)xmlnsAttr{
     return [NSString stringWithFormat:@"xmlns=\"%@\"",[self nameSpace]];
 }
+-(NSString*)searchName{
+    if (methodName&&[methodName length]>0) {
+        return [NSString stringWithFormat:@"%@Result",[self methodName]];
+    }
+    return @"";
+}
+-(NSString*)xpath{
+    NSString *str=[self searchName];
+    if ([str length]>0) {
+        return [NSString stringWithFormat:@"//%@",str];
+    }
+    return @"";
+}
+-(NSString*)filterXml{
+    if (xmlString&&[xmlString length]>0) {
+        return [xmlString stringByReplacingOccurrencesOfString:[self xmlnsAttr] withString:@""];
+    }
+    return @"";
+}
+-(XmlNode*)methodNode{
+    NSString *xml=[self filterXml];
+    if ([xml length]>0) {
+        //XmlParseHelper *_helper=[[[XmlParseHelper alloc] initWithData:xml] autorelease];
+        [self.xmlParse setDataSource:xml];
+        return [self.xmlParse soapXmlSelectSingleNode:[self xpath]];
+    }
+    return nil;
+}
+- (id)json{
+    XmlNode *node=[self methodNode];
+    if (node!=nil&&[node.InnerText length]>0) {
+        return [NSJSONSerialization JSONObjectWithData:[node.InnerText dataUsingEncoding:NSUTF8StringEncoding] options:1 error:nil];
+    }
+    return nil;
+}
+-(BOOL)hasSuccess{
+    if (xmlString&&[xmlString length]>0)return YES;
+    return NO;
+}
 +(id)requestResult:(ASIHTTPRequest*)httpRequest{
     ServiceResult *entity=[[ServiceResult alloc] init];
     entity.request=httpRequest;
