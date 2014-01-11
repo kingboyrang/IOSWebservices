@@ -1,20 +1,13 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
-<soapenv:Envelope
-    xmlns:q0="http://webservice.modules.springside.org"
-    xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
-    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-    <soapenv:Header>
-        <authHeader>
-            <userId>wanfang</userId>
-            <userPass>wanfang</userPass>
-        </authHeader>
-    </soapenv:Header>
-    <soapenv:Body>
-        <q0:simpleQuery>
-            <queryString>法律</queryString>
-            <section>all</section>
-            <pageNo>1</pageNo>
-        </q0:simpleQuery>
-    </soapenv:Body>  
-</soapenv:Envelope>
+﻿<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <soap:Body>
+        <GetPersonByNameResponse xmlns="http://tempuri.org/">
+        <GetPersonByNameResult>
+            <Id>67faaf49-b781-459f-8cf7-a3bb25cb5388</Id>
+            <Name>邓万龙</Name>
+            <Grander>1</Grander>
+            <Birthday>1991-01-02T00:00:00</Birthday>
+            <Memo>研发人员2</Memo></GetPersonByNameResult>
+        </GetPersonByNameResponse>
+    </soap:Body>
+</soap:Envelope>

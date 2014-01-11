@@ -8,70 +8,57 @@
 
 #import "ServiceResult.h"
 @implementation ServiceResult
-@synthesize request;
-@synthesize userInfo;
-@synthesize xmlParse;
-@synthesize xmlString;
-@synthesize xmlValue;
-@synthesize nameSpace;
-@synthesize methodName;
-@synthesize xmlnsAttr;
+
 -(NSString*)nameSpace{
-    if (!nameSpace) {
-        if (self.request) {
-            NSString *soapAction=[[self.request requestHeaders] objectForKey:@"SOAPAction"];
+    if (_request) {
+            NSString *soapAction=[[_request requestHeaders] objectForKey:@"SOAPAction"];
             NSRange range = [soapAction  rangeOfString:@"/" options:NSBackwardsSearch];
             if(range.location!=NSNotFound){
                 int pos=range.location;
-                nameSpace=[soapAction substringWithRange:NSMakeRange(0, pos+1)];
+                return [soapAction substringWithRange:NSMakeRange(0, pos+1)];
             }
-        }
-
     }
-    return nameSpace;
+    return @"";
 }
 -(NSString*)methodName{
-    if (!methodName) {
-        if (self.request) {
+        if (_request) {
             int len=[self.nameSpace length];
-            NSString *soapAction=[[self.request requestHeaders] objectForKey:@"SOAPAction"];
+            NSString *soapAction=[[_request requestHeaders] objectForKey:@"SOAPAction"];
             if(len>0){
-                methodName=[soapAction stringByReplacingCharactersInRange:NSMakeRange(0,len) withString:@""];
+                return [soapAction stringByReplacingCharactersInRange:NSMakeRange(0,len) withString:@""];
             }
         }
-    }
-    return methodName;
+    return @"";
         
 }
 -(NSDictionary*)userInfo{
-    if (!userInfo) {
-        if (self.request) {
-            userInfo=[self.request userInfo];
+        if (_request) {
+           return [_request userInfo];
         }
-    }
-    return userInfo;
+   
+    return [NSDictionary dictionary];
 }
 -(NSString*)xmlString{
-    if (!xmlString) {
-        if (self.request) {
-            NSString *temp=[self.request responseString];
-            int statusCode = [self.request responseStatusCode];
-            NSError *error=[self.request error];
+        if (_request) {
+            NSString *temp=[_request responseString];
+            int statusCode = [_request responseStatusCode];
+            NSError *error=[_request error];
             //如果发生错误，就返回空
             if (error||statusCode!=200) {
                 temp=@"";
             }
-            xmlString=temp;
+            return temp;
         }
-    }
-    return xmlString;
+    
+    return @"";
 }
 -(NSString*)xmlnsAttr{
     return [NSString stringWithFormat:@"xmlns=\"%@\"",[self nameSpace]];
 }
 -(NSString*)searchName{
-    if (methodName&&[methodName length]>0) {
-        return [NSString stringWithFormat:@"%@Result",[self methodName]];
+    NSString *name=[self methodName];
+    if ([name length]>0) {
+        return [NSString stringWithFormat:@"%@Result",name];
     }
     return @"";
 }
@@ -83,8 +70,9 @@
     return @"";
 }
 -(NSString*)filterXml{
-    if (xmlString&&[xmlString length]>0) {
-        return [xmlString stringByReplacingOccurrencesOfString:[self xmlnsAttr] withString:@""];
+    NSString *xml=[self xmlString];
+    if ([xml length]>0) {
+        return [xml stringByReplacingOccurrencesOfString:[self xmlnsAttr] withString:@""];
     }
     return @"";
 }
@@ -105,7 +93,7 @@
     return nil;
 }
 -(BOOL)hasSuccess{
-    if (xmlString&&[xmlString length]>0)return YES;
+    if ([[self xmlString] length]>0)return YES;
     return NO;
 }
 +(id)requestResult:(ASIHTTPRequest*)httpRequest{
