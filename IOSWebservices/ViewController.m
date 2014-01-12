@@ -22,14 +22,9 @@
     
     _helper=[[ServiceHelper alloc] init];
     
-    NSString *path=[[NSBundle mainBundle] pathForResource:@"testXml" ofType:@"xml"];
-    NSString *xml=[NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:nil];
-    xml=[xml stringByReplacingOccurrencesOfString:@"xmlns=\"http://tempuri.org/\"" withString:@""];
-    XmlParseHelper *parse=[[XmlParseHelper alloc] initWithData:xml];
-    
-    NSArray *arr=[parse soapXmlSelectNodes:@"//GetPersonByNameResult"];
-    
-    NSLog(@"result=%@",arr);
+  
+   
+  
     
     /**
      [result.xmlParse setDataSource:result.filterXml];

@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0195BC1418814EAA00486E78 /* ServiceResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 0195BC1318814EAA00486E78 /* ServiceResult.m */; };
 		01BEC3EF18331F6F00B77C8D /* ServiceHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 01BEC3EA18331F6F00B77C8D /* ServiceHelper.m */; };
 		01BEC3F118331F6F00B77C8D /* ServiceArgs.m in Sources */ = {isa = PBXBuildFile; fileRef = 01BEC3EE18331F6F00B77C8D /* ServiceArgs.m */; };
 		01BEC3FA183323FD00B77C8D /* GDataXMLNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 01BEC3F5183323FC00B77C8D /* GDataXMLNode.m */; };
@@ -26,6 +25,7 @@
 		01BEC41B1833297800B77C8D /* NSString+TPCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 01BEC41A1833297800B77C8D /* NSString+TPCategory.m */; };
 		01BEC41E1833298C00B77C8D /* NSData+TPCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 01BEC41D1833298C00B77C8D /* NSData+TPCategory.m */; };
 		01E14BDB17D5BD2700AC2173 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01E14BDA17D5BD2700AC2173 /* ViewController.m */; };
+		01E5916D18822446001D04B8 /* ServiceResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 01E5916C18822446001D04B8 /* ServiceResult.m */; };
 		260C97D517B3AA8800B0848C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 260C97D417B3AA8800B0848C /* UIKit.framework */; };
 		260C97D717B3AA8800B0848C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 260C97D617B3AA8800B0848C /* Foundation.framework */; };
 		260C97D917B3AA8800B0848C /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 260C97D817B3AA8800B0848C /* CoreGraphics.framework */; };
@@ -54,8 +54,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		0195BC1218814EAA00486E78 /* ServiceResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceResult.h; sourceTree = "<group>"; };
-		0195BC1318814EAA00486E78 /* ServiceResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceResult.m; sourceTree = "<group>"; };
 		01BEC3E918331F6F00B77C8D /* ServiceHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceHelper.h; sourceTree = "<group>"; };
 		01BEC3EA18331F6F00B77C8D /* ServiceHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceHelper.m; sourceTree = "<group>"; };
 		01BEC3ED18331F6F00B77C8D /* ServiceArgs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceArgs.h; sourceTree = "<group>"; };
@@ -87,6 +85,8 @@
 		01BEC41C1833298C00B77C8D /* NSData+TPCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+TPCategory.h"; sourceTree = "<group>"; };
 		01BEC41D1833298C00B77C8D /* NSData+TPCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+TPCategory.m"; sourceTree = "<group>"; };
 		01E14BDA17D5BD2700AC2173 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		01E5916B18822446001D04B8 /* ServiceResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceResult.h; sourceTree = "<group>"; };
+		01E5916C18822446001D04B8 /* ServiceResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceResult.m; sourceTree = "<group>"; };
 		260C97D117B3AA8800B0848C /* IOSWebservices.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IOSWebservices.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		260C97D417B3AA8800B0848C /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		260C97D617B3AA8800B0848C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -318,8 +318,8 @@
 		260C982517B3ABEA00B0848C /* WebService */ = {
 			isa = PBXGroup;
 			children = (
-				0195BC1218814EAA00486E78 /* ServiceResult.h */,
-				0195BC1318814EAA00486E78 /* ServiceResult.m */,
+				01E5916B18822446001D04B8 /* ServiceResult.h */,
+				01E5916C18822446001D04B8 /* ServiceResult.m */,
 				01BEC3E918331F6F00B77C8D /* ServiceHelper.h */,
 				01BEC3EA18331F6F00B77C8D /* ServiceHelper.m */,
 				01BEC3ED18331F6F00B77C8D /* ServiceArgs.h */,
@@ -414,7 +414,7 @@
 				01BEC3F118331F6F00B77C8D /* ServiceArgs.m in Sources */,
 				260C981017B3AB4300B0848C /* ASINetworkQueue.m in Sources */,
 				260C981117B3AB4300B0848C /* ASIDataDecompressor.m in Sources */,
-				0195BC1418814EAA00486E78 /* ServiceResult.m in Sources */,
+				01E5916D18822446001D04B8 /* ServiceResult.m in Sources */,
 				260C981217B3AB4300B0848C /* ASIDataCompressor.m in Sources */,
 				260C981317B3AB4300B0848C /* ASIInputStream.m in Sources */,
 				260C981417B3AB4300B0848C /* ASIAuthenticationDialog.m in Sources */,
