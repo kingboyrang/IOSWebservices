@@ -7,6 +7,7 @@
 //
 
 #import "ViewController.h"
+#import "NSURLConnectionManager.h"
 @interface ViewController ()
 
 @end
@@ -15,23 +16,13 @@
 -(void)dealloc{
     [super dealloc];
     [_helper release],_helper=nil;
+    
 }
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
     _helper=[[ServiceHelper alloc] init];
-    
-  
-   
-  
-    
-    /**
-     [result.xmlParse setDataSource:result.filterXml];
-     NSArray *arr=[result.xmlParse soapXmlSelectNodes:result.xpath];
-     NSLog(@"result=%@",arr);
-     ***/
-    
     
     /*********注意事项***************/
     
@@ -47,7 +38,25 @@
      NSArray *arr=[result.xmlParse soapXmlSelectNodes:@"//查询的字符串"];
      
      ***/
-
+    
+    /***
+    NSMutableArray *params=[NSMutableArray array];
+    [params addObject:[NSDictionary dictionaryWithObjectsAndKeys:@"1.0",@"allInOneVersion", nil]];
+    ServiceArgs *args1=[[[ServiceArgs alloc] init] autorelease];
+    args1.serviceURL=@"http://118.122.112.83:8088/webservice/service.php?class=WS_System";
+    args1.serviceNameSpace=@"http://www.turbocrm.com/webservice";
+    args1.methodName=@"BeCompatible";
+    args1.soapParams=params;
+    NSLog(@"soap=%@\n",args1.soapMessage);
+    
+    [_helper asynService:args1 success:^(ServiceResult *sr) {
+        //XmlNode *node=[result methodNode];
+        NSLog(@"解析xml结果=%@\n",[sr.xmlParse soapXmlSelectNodes:@"//BeCompatibleReturn"]);
+    } failed:^(NSError *error, NSDictionary *userInfo) {
+         NSLog(@"error=%@\n",[error description]);
+    }];
+    ***/
+    
 	
 }
 

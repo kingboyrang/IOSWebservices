@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		01990F2618B2E3DC0039E4A7 /* ServiceRequestResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 01990F2518B2E3DC0039E4A7 /* ServiceRequestResult.m */; };
+		01990F2918B2F2530039E4A7 /* NSURLConnectionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 01990F2818B2F2520039E4A7 /* NSURLConnectionManager.m */; };
 		01BEC3EF18331F6F00B77C8D /* ServiceHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 01BEC3EA18331F6F00B77C8D /* ServiceHelper.m */; };
 		01BEC3F118331F6F00B77C8D /* ServiceArgs.m in Sources */ = {isa = PBXBuildFile; fileRef = 01BEC3EE18331F6F00B77C8D /* ServiceArgs.m */; };
 		01BEC3FA183323FD00B77C8D /* GDataXMLNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 01BEC3F5183323FC00B77C8D /* GDataXMLNode.m */; };
@@ -54,6 +56,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		01990F2418B2E3DC0039E4A7 /* ServiceRequestResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceRequestResult.h; sourceTree = "<group>"; };
+		01990F2518B2E3DC0039E4A7 /* ServiceRequestResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceRequestResult.m; sourceTree = "<group>"; };
+		01990F2718B2F2520039E4A7 /* NSURLConnectionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSURLConnectionManager.h; sourceTree = "<group>"; };
+		01990F2818B2F2520039E4A7 /* NSURLConnectionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSURLConnectionManager.m; sourceTree = "<group>"; };
 		01BEC3E918331F6F00B77C8D /* ServiceHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceHelper.h; sourceTree = "<group>"; };
 		01BEC3EA18331F6F00B77C8D /* ServiceHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceHelper.m; sourceTree = "<group>"; };
 		01BEC3ED18331F6F00B77C8D /* ServiceArgs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceArgs.h; sourceTree = "<group>"; };
@@ -324,6 +330,10 @@
 				01BEC3EA18331F6F00B77C8D /* ServiceHelper.m */,
 				01BEC3ED18331F6F00B77C8D /* ServiceArgs.h */,
 				01BEC3EE18331F6F00B77C8D /* ServiceArgs.m */,
+				01990F2418B2E3DC0039E4A7 /* ServiceRequestResult.h */,
+				01990F2518B2E3DC0039E4A7 /* ServiceRequestResult.m */,
+				01990F2718B2F2520039E4A7 /* NSURLConnectionManager.h */,
+				01990F2818B2F2520039E4A7 /* NSURLConnectionManager.m */,
 			);
 			name = WebService;
 			sourceTree = "<group>";
@@ -424,6 +434,8 @@
 				01BEC41B1833297800B77C8D /* NSString+TPCategory.m in Sources */,
 				01E14BDB17D5BD2700AC2173 /* ViewController.m in Sources */,
 				01BEC3FC183323FD00B77C8D /* XmlParseHelper.m in Sources */,
+				01990F2618B2E3DC0039E4A7 /* ServiceRequestResult.m in Sources */,
+				01990F2918B2F2530039E4A7 /* NSURLConnectionManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
