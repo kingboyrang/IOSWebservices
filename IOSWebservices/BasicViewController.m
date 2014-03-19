@@ -15,6 +15,7 @@
     AnimateErrorView *_errorView;
     AnimateErrorView *_successView;
 }
+-(void)performDelaySelector:(SEL)selector delaytime:(NSTimeInterval)interval;
 @end
 
 @implementation BasicViewController
@@ -188,6 +189,20 @@
             errorView.labelTitle.text=title;
         }];
         [self performSelector:@selector(hideSuccessViewAnimated:) withObject:complete afterDelay:2.0f];
+        /***
+        dispatch_time_t popTime =dispatch_time(DISPATCH_TIME_NOW, 2.0f * NSEC_PER_SEC);
+        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+            [self hideSuccessViewAnimated:complete];
+        });
+       ****/
     }];
+}
+-(void)performDelaySelector:(SEL)selector delaytime:(NSTimeInterval)interval{
+    //int64_t delayInSeconds = 1.0f;
+    
+    dispatch_time_t popTime =dispatch_time(DISPATCH_TIME_NOW, interval * NSEC_PER_SEC);
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+
+    });
 }
 @end

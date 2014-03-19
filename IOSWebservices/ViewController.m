@@ -7,7 +7,6 @@
 //
 
 #import "ViewController.h"
-#import "NSURLConnectionManager.h"
 @interface ViewController ()
 
 @end
@@ -25,7 +24,7 @@
     _helper=[[ServiceHelper alloc] init];
     
     /*********注意事项***************/
-    
+   
     /***(1)如果返回的是json字符串，则可以调用以下方法直接转换成json对象
      
      id json=[result json];
@@ -113,9 +112,6 @@
         }
         NSArray *arr=[result.xmlParse soapXmlSelectNodes:@"//ForexRmbRate"];
         NSLog(@"解析xml结果=%@\n",arr);
-        
-        
-        
     } failed:^(NSError *error, NSDictionary *userInfo) {
         NSLog(@"error=%@\n",[error description]);
         [self hideLoadingFailedWithTitle:@"block请求失败!" completed:nil];
@@ -124,9 +120,6 @@
 //队列请求
 - (IBAction)queueClick:(id)sender {
     ServiceHelper *helper=[ServiceHelper sharedInstance];
-    
-
-    
     //添加队列1
     ASIHTTPRequest *request1=[ServiceHelper commonSharedRequest:[ServiceArgs serviceMethodName:@"getForexRmbRate"]];
     [request1 setUserInfo:[NSDictionary dictionaryWithObjectsAndKeys:@"request1",@"name", nil]];
@@ -150,11 +143,7 @@
         NSLog(@"%@请求失败，失败原因:%@",name,[error description]);
     } complete:^(NSArray *results) {
         NSLog(@"排队列请求完成！\n");
-        [self hideLoadingViewAnimated:^(AnimateLoadView *hideView) {
-            [self showSuccessViewWithHide:^(AnimateErrorView *errorView) {
-                errorView.labelTitle.text=@"排队列请求完成！";
-            } completed:nil];
-        }];
+        [self hideLoadingSuccessWithTitle:@"排队列请求完成！" completed:nil];
     }];
 }
 #pragma mark -
