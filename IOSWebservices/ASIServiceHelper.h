@@ -14,7 +14,15 @@ typedef void (^queueFinishBlock)(ASIHTTPRequest *request);
 typedef void (^queueFailedBlock)(NSError *error,NSDictionary *userInfo);
 typedef void (^queueCompleteBlock)(NSArray *results);
 
-@interface ASIServiceHelper : NSObject
+@interface ASIServiceHelper : NSObject{
+@private
+    NSMutableArray *_queueResults;
+    NSMutableArray *_requestList;
+    
+    queueFinishBlock _finishBlock;
+    queueFailedBlock _failedBlock;
+    queueCompleteBlock _completeBlock;
+}
 -(void)setFinishBlock:(queueFinishBlock)aFinishBlock;
 -(void)setFailedBlock:(queueFailedBlock)aFailedBlock;
 -(void)setCompleteBlock:(queueCompleteBlock)aCompleteBlock;

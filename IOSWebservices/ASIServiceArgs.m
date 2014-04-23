@@ -40,6 +40,7 @@ static NSString *defaultWebServiceNameSpace=@"http://webxml.com.cn/";
 -(id)init{
     if (self=[super init]) {
         self.httpWay=ASIServiceHttpSoap12;
+        self.defaultEncoding=NSUTF8StringEncoding;
         self.timeOutSeconds=60.0;
     }
     return self;
@@ -67,7 +68,17 @@ static NSString *defaultWebServiceNameSpace=@"http://webxml.com.cn/";
     }
     return defaultWebServiceNameSpace;
 }
+- (void)setHttpWay:(ASIServiceHttpWay)way{
+    if (way!=_httpWay) {
+        self.bodyMessage=@"";
+        self.headers=nil;
+    }
+    _httpWay=way;
+}
 -(NSString*)bodyMessage{
+    if (self.httpWay==ASIServiceHttpGet) {
+        return @"";
+    }
     if (_bodyMessage&&[_bodyMessage length]>0) {
         return _bodyMessage;
     }
@@ -81,7 +92,7 @@ static NSString *defaultWebServiceNameSpace=@"http://webxml.com.cn/";
         return _headers;
     }
     if (self.httpWay==ASIServiceHttpGet) {
-        return [NSDictionary dictionaryWithObjectsAndKeys:[self.webURL host],@"Host", nil];
+        return [NSMutableDictionary dictionaryWithObjectsAndKeys:[self.webURL host],@"Host", nil];
     }
     NSMutableDictionary *dic=[NSMutableDictionary dictionary];
     [dic setValue:[[self webURL] host] forKey:@"Host"];
@@ -112,7 +123,7 @@ static NSString *defaultWebServiceNameSpace=@"http://webxml.com.cn/";
     //访问方式
     [req setRequestMethod:self.httpWay==ASIServiceHttpGet?@"GET":@"POST"];
     //设置编码
-    [req setDefaultResponseEncoding:NSUTF8StringEncoding];
+    [req setDefaultResponseEncoding:self.defaultEncoding];
     //body内容
     if (self.httpWay!=ASIServiceHttpGet) {
         [req appendPostData:[self.bodyMessage dataUsingEncoding:NSUTF8StringEncoding]];

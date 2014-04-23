@@ -22,6 +22,7 @@ typedef enum{
 @property(nonatomic,readonly) NSString *defaultSoapMesage;
 @property(nonatomic,assign)   ASIServiceHttpWay httpWay;//请求方式,默认为ServiceHttpSoap12请求
 @property(nonatomic,assign)   NSTimeInterval timeOutSeconds;//请求超时时间,默认60秒
+@property(nonatomic,assign)   NSStringEncoding defaultEncoding;//编码方式
 @property(nonatomic,copy)     NSString *serviceURL;//webservice访问地址
 @property(nonatomic,copy)     NSString *serviceNameSpace;//webservice命名空间
 @property(nonatomic,copy)     NSString *methodName;//调用的方法名

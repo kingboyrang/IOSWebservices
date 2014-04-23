@@ -9,14 +9,8 @@
 #import "ASIServiceHelper.h"
 #import "ASINetworkQueue.h"
 
-@interface ASIServiceHelper (){
-    NSMutableArray *_queueResults;
-    NSMutableArray *_requestList;
-}
+@interface ASIServiceHelper ()
 @property(nonatomic,retain) ASINetworkQueue *networkQueue;
-@property (readwrite, nonatomic, copy) queueFinishBlock finishBlock;
-@property (readwrite, nonatomic, copy) queueFailedBlock failedBlock;
-@property (readwrite, nonatomic, copy) queueCompleteBlock completeBlock;
 -(void)resetQueue;
 @end
 
@@ -32,6 +26,9 @@
     if (_queueResults) {
         [_queueResults release];
     }
+    Block_release(_failedBlock);
+    Block_release(_finishBlock);
+    Block_release(_completeBlock);
 	[super dealloc];
 }
 - (id)init{
@@ -42,6 +39,8 @@
     return self;
 }
 - (void)setFinishBlock:(queueFinishBlock)aFinishBlock{
+     //Block_release(_finishBlock);
+    //_finishBlock=Block_copy(aFinishBlock);
     if (_finishBlock!=aFinishBlock) {
         [_finishBlock release];
         _finishBlock=[aFinishBlock copy];
@@ -93,10 +92,13 @@
     [self.networkQueue go];
 }
 -(void)startQueue:(queueFinishBlock)finish failed:(queueFailedBlock)failed complete:(queueCompleteBlock)finishQueue{
+    Block_release(_failedBlock);
+    Block_release(_finishBlock);
+    Block_release(_completeBlock);
     
-    self.finishBlock=finish;
-    self.failedBlock=failed;
-    self.completeBlock=finishQueue;
+    _finishBlock=Block_copy(finish);
+    _failedBlock=Block_copy(failed);
+    _completeBlock=Block_copy(finishQueue);
     [self startQueue];
 }
 -(void)clearAndDelegate{
@@ -112,32 +114,22 @@
 }
 #pragma mark -Queue delegate Methods
 -(void)queueFetchComplete:(ASIHTTPRequest*)request{
-   
-    if (self.completeBlock) {
-        self.completeBlock(_queueResults);
+    if (_completeBlock) {
+        _completeBlock(_queueResults);
     }
-    if (_requestList) {
-        [_requestList removeAllObjects];
-    }
-    if (_queueResults) {
-        [_queueResults removeAllObjects];
-    }
+    [self clearAndDelegate];
 }
 -(void)requestFetchComplete:(ASIHTTPRequest*)request{
+    if (_finishBlock) {
+        _finishBlock(request);
+    }
     if (_queueResults) {
         [_queueResults addObject:request];
     }
-    if (self.finishBlock) {
-        if (_queueResults&&[_queueResults count]>0) {
-            self.finishBlock([_queueResults lastObject]);
-        }else{
-           self.finishBlock(request);
-        }
-    }    
 }
 -(void)requestFetchFailed:(ASIHTTPRequest*)request{
-    if (self.failedBlock) {
-        self.failedBlock([request error],[request userInfo]);
+    if (_failedBlock) {
+        _failedBlock([request error],[request userInfo]);
     }
 }
 #pragma mark -private Methods

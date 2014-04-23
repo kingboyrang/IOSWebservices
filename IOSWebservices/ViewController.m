@@ -7,6 +7,8 @@
 //
 
 #import "ViewController.h"
+#import "ASIServiceHTTPRequest.h"
+#import "ASIServiceHelper.h"
 @interface ViewController ()
 
 @end
@@ -20,6 +22,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    /***WebService2与WebService二选一使用***/
     
     _helper=[[ServiceHelper alloc] init];
     
@@ -97,28 +101,33 @@
 //异步请求deletegated
 - (IBAction)asyncDelegatedClick:(id)sender {
     [self showLoadingAnimatedWithTitle:@"正在执行异步请求deletegated,请稍等..."];
-    [_helper asynServiceMethodName:@"getForexRmbRate" delegate:self];
+    ASIServiceHTTPRequest *request=[ASIServiceHTTPRequest requestWithMethodName:@"getForexRmbRate"];
+    [request setDelegate:self];
+    [request startAsynchronous];
 }
 //异步请求block
 - (IBAction)asyncBlockClick:(id)sender {
-    NSLog(@"异步请求block\n");
     [self showLoadingAnimatedWithTitle:@"正在执行异步block请求,请稍等..."];
-    [_helper asynServiceMethodName:@"getForexRmbRate" success:^(ServiceResult *result) {
-        BOOL boo=strlen([result.xmlString UTF8String])>0?YES:NO;
-        if (boo) {
+    
+    ASIServiceHTTPRequest *request=[ASIServiceHTTPRequest requestWithMethodName:@"getForexRmbRate"];
+    [request success:^{
+        NSLog(@"请求头=%@",request.ServiceArgs.headers);
+        NSLog(@"请求body=%@",request.ServiceArgs.bodyMessage);
+        if (request.ServiceResult.success) {
             [self hideLoadingSuccessWithTitle:@"block请求成功!" completed:nil];
+            NSArray *arr=[request.ServiceResult.xmlParse soapXmlSelectNodes:@"//ForexRmbRate"];
+            NSLog(@"解析xml结果=%@\n",arr);
         }else{
-            [self hideLoadingFailedWithTitle:@"block请求失败!" completed:nil];
+            [self hideLoadingFailedWithTitle:@"block请求失败" completed:nil];
         }
-        NSArray *arr=[result.xmlParse soapXmlSelectNodes:@"//ForexRmbRate"];
-        NSLog(@"解析xml结果=%@\n",arr);
-    } failed:^(NSError *error, NSDictionary *userInfo) {
-        NSLog(@"error=%@\n",[error description]);
+    } failure:^{
+        NSLog(@"error=%@\n",request.error.description);
         [self hideLoadingFailedWithTitle:@"block请求失败!" completed:nil];
     }];
 }
 //队列请求
 - (IBAction)queueClick:(id)sender {
+    /***
     ServiceHelper *helper=[ServiceHelper sharedInstance];
     //添加队列1
     ASIHTTPRequest *request1=[ServiceHelper commonSharedRequest:[ServiceArgs serviceMethodName:@"getForexRmbRate"]];
@@ -145,22 +154,52 @@
         NSLog(@"排队列请求完成！\n");
         [self hideLoadingSuccessWithTitle:@"排队列请求完成！" completed:nil];
     }];
+     ***/
+    
+    
+    ASIServiceHelper *helper=[[ASIServiceHelper alloc] init];
+    //添加队列1
+    ASIHTTPRequest *request1=[[ASIServiceArgs serviceMethodName:@"getForexRmbRate"] request];
+    //ASIServiceHTTPRequest *request1=[ASIServiceHTTPRequest requestWithMethodName:@"getForexRmbRate"];
+    [request1 setUserInfo:[NSDictionary dictionaryWithObjectsAndKeys:@"request1",@"name", nil]];
+    [helper addQueue:request1];
+    //添加队列2
+    ASIServiceArgs *args1=[[[ASIServiceArgs alloc] init] autorelease];
+    args1.serviceURL=@"http://webservice.webxml.com.cn/WebServices/MobileCodeWS.asmx";
+    args1.serviceNameSpace=@"http://WebXml.com.cn/";
+    args1.methodName=@"getDatabaseInfo";
+    ASIHTTPRequest *request2=[args1 request];
+    //ASIServiceHTTPRequest *request2=[ASIServiceHTTPRequest requestWithArgs:args1];
+    [request2 setUserInfo:[NSDictionary dictionaryWithObjectsAndKeys:@"request2",@"name", nil]];
+    [helper addQueue:request2];
+    
+    [self showLoadingAnimatedWithTitle:@"正在执行队列请求,请稍等..."];
+    //执行队列
+    [helper startQueue:^(ASIHTTPRequest *request) {
+        NSString *name=[request.userInfo objectForKey:@"name"];
+        NSLog(@"%@请求成功，xml=%@",name,request.responseString);
+    } failed:^(NSError *error, NSDictionary *userInfo) {
+        NSString *name=[userInfo objectForKey:@"name"];
+        NSLog(@"%@请求失败，失败原因:%@",name,[error description]);
+    } complete:^(NSArray *results) {
+        NSLog(@"排队列请求完成！\n");
+        [self hideLoadingSuccessWithTitle:@"排队列请求完成！" completed:nil];
+    }];
 }
 #pragma mark -
 #pragma mark ServiceHelperDelegate Methods
--(void)finishSoapRequest:(ServiceResult*)result{
+- (void)requestFinished:(ASIServiceHTTPRequest *)request{
     
-    NSArray *arr=[result.xmlParse soapXmlSelectNodes:@"//ForexRmbRate"];
+    NSArray *arr=[request.ServiceResult.xmlParse soapXmlSelectNodes:@"//ForexRmbRate"];
     NSLog(@"解析xml结果=%@\n",arr);
-    BOOL boo=strlen([result.xmlString UTF8String])>0?YES:NO;
-    if (boo) {
+    if (request.ServiceResult.success) {
         [self hideLoadingSuccessWithTitle:@"deletegated请求成功!" completed:nil];
     }else{
         [self hideLoadingFailedWithTitle:@"deletegated请求失败!" completed:nil];
     }
 }
--(void)failedSoapRequest:(NSError*)error userInfo:(NSDictionary*)dic{
- NSLog(@"error=%@\n",[error description]);
+- (void)requestFailed:(ASIServiceHTTPRequest *)request{
+ NSLog(@"error=%@\n",[request.error description]);
    [self hideLoadingFailedWithTitle:@"deletegated请求失败!" completed:nil];
 }
 @end

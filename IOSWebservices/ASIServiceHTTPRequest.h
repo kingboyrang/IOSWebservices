@@ -14,5 +14,10 @@
 }
 @property(nonatomic,retain) ASIServiceArgs *ServiceArgs;
 @property(nonatomic,readonly) ASIServiceResult *ServiceResult;
-+(ASIServiceHTTPRequest*)requestWithArgs:(ASIServiceArgs*)args;
++ (id)requestWithArgs:(ASIServiceArgs*)args;
++ (id)requestWithMethodName:(NSString*)name;
+//异步简便方法
+- (void)success:(ASIBasicBlock)aCompletionBlock failure:(ASIBasicBlock)aFailedBlock;
+//同步简便方法
+- (NSString*)synchronousWithError:(NSError**)error;
 @end
