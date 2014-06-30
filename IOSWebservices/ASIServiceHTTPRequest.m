@@ -50,9 +50,9 @@
     [self setFailedBlock:aFailedBlock];
     [self startAsynchronous];
 }
-- (NSString*)synchronousWithError:(NSError**)error{
+- (NSString*)synchronousWithError:(NSError**)err{
     [self startSynchronous];
-    *error=[self error];
+    *err=[self error];
     if ([self error]) {
         return [self responseString];
     }

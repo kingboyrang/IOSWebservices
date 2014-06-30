@@ -40,7 +40,7 @@ static NSString *defaultWebServiceNameSpace=@"http://webxml.com.cn/";
 }
 -(id)init{
     if (self=[super init]) {
-        self.httpWay=ASIServiceHttpSoap12;
+        self.httpWay=ASIServiceHttpSoap1;
         self.defaultEncoding=NSUTF8StringEncoding;
         self.timeOutSeconds=60.0;
     }
