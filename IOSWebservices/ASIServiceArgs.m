@@ -12,6 +12,7 @@
 //soap 1.2请求方式
 #define defaultSoap12Message @"<?xml version=\"1.0\" encoding=\"utf-8\"?><soap12:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap12=\"http://www.w3.org/2003/05/soap-envelope\"><soap12:Header>%@</soap12:Header><soap12:Body>%@</soap12:Body></soap12:Envelope>"
 @interface ASIServiceArgs()
+@property (nonatomic,readonly) NSString *hostName;
 -(NSString*)stringSoapMessage:(NSArray*)params;
 -(NSString*)paramsFormatString:(NSArray*)params;
 -(NSString*)soapAction:(NSString*)namespace methodName:(NSString*)methodName;
@@ -75,6 +76,7 @@ static NSString *defaultWebServiceNameSpace=@"http://webxml.com.cn/";
     }
     _httpWay=way;
 }
+/***
 -(NSString*)bodyMessage{
     if (self.httpWay==ASIServiceHttpGet) {
         return @"";
@@ -87,15 +89,35 @@ static NSString *defaultWebServiceNameSpace=@"http://webxml.com.cn/";
     }
     return [self stringSoapMessage:[self soapParams]];
 }
+ ***/
+- (NSString*)requestBodyMessage{
+    if (self.httpWay==ASIServiceHttpGet) {
+        return @"";
+    }
+    if (_bodyMessage&&[_bodyMessage length]>0) {
+        return _bodyMessage;
+    }
+    if (self.httpWay==ASIServiceHttpPost) {
+        return [self paramsTostring];
+    }
+    return [self stringSoapMessage:[self soapParams]];
+}
+- (NSString*)hostName{
+    NSURL *webURL=[self requestURL];
+    if (webURL.port) {
+        return [NSString stringWithFormat:@"%@:%d",webURL.host,[webURL.port intValue]];
+    }
+    return [webURL host];
+}
 -(NSDictionary*)headers{
     if (_headers&&[_headers count]>0) {
         return _headers;
     }
     if (self.httpWay==ASIServiceHttpGet) {
-        return [NSMutableDictionary dictionaryWithObjectsAndKeys:[self.webURL host],@"Host", nil];
+        return [NSMutableDictionary dictionaryWithObjectsAndKeys:[self hostName],@"Host", nil];
     }
     NSMutableDictionary *dic=[NSMutableDictionary dictionary];
-    [dic setValue:[[self webURL] host] forKey:@"Host"];
+    [dic setValue:[self hostName] forKey:@"Host"];
     if (self.httpWay==ASIServiceHttpPost) {
         [dic setValue:@"application/x-www-form-urlencoded" forKey:@"Content-Type"];
     }
@@ -105,7 +127,7 @@ static NSString *defaultWebServiceNameSpace=@"http://webxml.com.cn/";
     if (self.httpWay==ASIServiceHttpSoap12) {
         [dic setValue:@"application/soap+xml; charset=utf-8" forKey:@"Content-Type"];
     }
-    [dic setValue:[NSString stringWithFormat:@"%d",[[self bodyMessage] length]] forKey:@"Content-Length"];
+    [dic setValue:[NSString stringWithFormat:@"%d",(int)[self.bodyMessage length]] forKey:@"Content-Length"];
     if (self.httpWay==ASIServiceHttpSoap1) {
         NSString *soapAction=[self soapAction:[self serviceNameSpace] methodName:[self methodName]];
         if ([soapAction length]>0) {

@@ -26,7 +26,7 @@ typedef enum{
 @property(nonatomic,copy)     NSString *serviceURL;//webservice访问地址
 @property(nonatomic,copy)     NSString *serviceNameSpace;//webservice命名空间
 @property(nonatomic,copy)     NSString *methodName;//调用的方法名
-@property(nonatomic,copy)     NSString *bodyMessage;//请求字符串
+@property(nonatomic,copy,getter=requestBodyMessage)     NSString *bodyMessage;//请求字符串
 @property(nonatomic,copy)     NSString *soapHeader;//有认证的请求头设置
 @property(nonatomic,retain)   NSDictionary *headers;//请求头
 @property(nonatomic,retain)   NSArray *soapParams;//参数设置

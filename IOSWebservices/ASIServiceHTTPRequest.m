@@ -58,6 +58,10 @@
     }
     return @"";
 }
+- (void)startSynchronous{
+    [self initRequestParams];
+    [super startSynchronous];
+}
 - (void)startAsynchronous{
     [self initRequestParams];
     [super startAsynchronous];

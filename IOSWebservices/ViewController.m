@@ -23,43 +23,25 @@
 {
     [super viewDidLoad];
     
-    /***WebService2与WebService二选一使用***/
+    /***WebService2与WebService二选一使用,最好使用WebService2***/
     
     _helper=[[ServiceHelper alloc] init];
     
-        /*********注意事项***************/
+    /*********注意事项***************
    
-    /***(1)如果返回的是json字符串，则可以调用以下方法直接转换成json对象
+    (1)如果返回的是json字符串，则可以调用以下方法直接转换成json对象
      
      id json=[result json];
-     
-    ***/
-    
-    /***(2)如果发现返回的soap xml字符串不能解析,则执行以下操作进行解析
+
+    (2)如果发现返回的soap xml字符串不能解析,则执行以下操作进行解析
      
      [result.xmlParse setDataSource:result.filterXml];
      NSArray *arr=[result.xmlParse soapXmlSelectNodes:@"//查询的字符串"];
      
+    (3)如果发现还是不能解析，请查看XmlParseHelper解析类或者了解一下 google GDataXML类库的使用
+     
+    (4)最后还是不懂如何使用，请下载自已所熟悉的xml解析类库去处理
      ***/
-    
-    /***
-    NSMutableArray *params=[NSMutableArray array];
-    [params addObject:[NSDictionary dictionaryWithObjectsAndKeys:@"1.0",@"allInOneVersion", nil]];
-    ServiceArgs *args1=[[[ServiceArgs alloc] init] autorelease];
-    args1.serviceURL=@"http://118.122.112.83:8088/webservice/service.php?class=WS_System";
-    args1.serviceNameSpace=@"http://www.turbocrm.com/webservice";
-    args1.methodName=@"BeCompatible";
-    args1.soapParams=params;
-    NSLog(@"soap=%@\n",args1.soapMessage);
-    
-    [_helper asynService:args1 success:^(ServiceResult *sr) {
-        //XmlNode *node=[result methodNode];
-        NSLog(@"解析xml结果=%@\n",[sr.xmlParse soapXmlSelectNodes:@"//BeCompatibleReturn"]);
-    } failed:^(NSError *error, NSDictionary *userInfo) {
-         NSLog(@"error=%@\n",[error description]);
-    }];
-    ***/
-    
 	
 }
 
@@ -70,31 +52,17 @@
 }
 //同步请求
 - (IBAction)SyncClick:(id)sender {
-    /**(1)调用其它的webservice并有参数**
-    NSMutableArray *params=[NSMutableArray array];
-    [params addObject:[NSDictionary dictionaryWithObjectsAndKeys:@"道道香食府",@"userName", nil]];
-    [params addObject:[NSDictionary dictionaryWithObjectsAndKeys:@"123456",@"passWord", nil]];
-    ServiceArgs *args1=[[[ServiceArgs alloc] init] autorelease];
-    args1.serviceURL=@"http://117.27.136.236:9000/WebServer/Phone/PHoneWebServer.asmx";
-    args1.serviceNameSpace=@"http://www.race.net.cn";
-    args1.methodName=@"EnterpriseLogin";
-    args1.soapParams=params;
-    NSLog(@"soap=%@\n",args1.soapMessage);
-    ServiceResult *result=[ServiceHelper syncService:args1];
-    NSLog(@"xml=%@\n",[result.request responseString]);
-    ***/
-  
-    /**(2)调用无参数的webservice**/
     [self showLoadingAnimatedWithTitle:@"正在同步..."];
-    ServiceResult *result=[ServiceHelper syncMethodName:@"getForexRmbRate"];
-    NSLog(@"同步请求xml=%@\n",result);
-   
-    /********[--如果无法解析，请启用以下两句--]**********
-     NSString* xml=[result.xmlString stringByReplacingOccurrencesOfString:result.xmlnsAttr withString:@""];
-     [result.xmlParse setDataSource:xml];
-     ****/
-    NSArray *arr=[result.xmlParse soapXmlSelectNodes:@"//ForexRmbRate"];
-    NSLog(@"解析xml结果=%@\n",arr);
+    ASIServiceHTTPRequest *request=[ASIServiceHTTPRequest requestWithMethodName:@"getForexRmbRate"];
+    [request startSynchronous];
+    NSLog(@"header=%@\n",request.ServiceArgs.headers);
+    NSLog(@"soap=%@\n",request.ServiceArgs.bodyMessage);
+    NSLog(@"同步请求xml=%@\n",request.responseString);
+    ASIServiceResult *sr=[request ServiceResult];
+    /***
+     如果不懂得使用解析类，请自行下载所熟悉的解析类库去处理解析
+     ***/
+    NSLog(@"解析xml结果=%@\n",[sr.xmlParse selectNodes:@"//ForexRmbRate"]);
     [self hideLoadingSuccessWithTitle:@"同步完成!" completed:nil];
     
 }
@@ -108,8 +76,9 @@
 //异步请求block
 - (IBAction)asyncBlockClick:(id)sender {
     [self showLoadingAnimatedWithTitle:@"正在执行异步block请求,请稍等..."];
-    
     ASIServiceHTTPRequest *request=[ASIServiceHTTPRequest requestWithMethodName:@"getForexRmbRate"];
+    //设置请求方式
+    //request.ServiceArgs.httpWay=ASIServiceHttpPost;
     [request success:^{
         NSLog(@"请求头=%@",request.ServiceArgs.headers);
         NSLog(@"请求body=%@",request.ServiceArgs.bodyMessage);
