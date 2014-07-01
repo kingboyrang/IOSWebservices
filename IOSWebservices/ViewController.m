@@ -14,18 +14,13 @@
 @end
 
 @implementation ViewController
--(void)dealloc{
-    [super dealloc];
-    [_helper release],_helper=nil;
-    
-}
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
     /***WebService2与WebService二选一使用,最好使用WebService2***/
     
-    _helper=[[ServiceHelper alloc] init];
+
     
     /*********注意事项***************
    
@@ -41,6 +36,10 @@
     (3)如果发现还是不能解析，请查看XmlParseHelper解析类或者了解一下 google GDataXML类库的使用
      
     (4)最后还是不懂如何使用，请下载自已所熟悉的xml解析类库去处理
+     
+    (5)默认请求方式为ASIServiceHttpSoap1,如果请求不成功，可以设置其它请求方式,请求方式为ASIServiceHttpWay枚举
+       可在ASIServiceArgs.h文件中查看
+     
      ***/
 	
 }
@@ -96,36 +95,6 @@
 }
 //队列请求
 - (IBAction)queueClick:(id)sender {
-    /***
-    ServiceHelper *helper=[ServiceHelper sharedInstance];
-    //添加队列1
-    ASIHTTPRequest *request1=[ServiceHelper commonSharedRequest:[ServiceArgs serviceMethodName:@"getForexRmbRate"]];
-    [request1 setUserInfo:[NSDictionary dictionaryWithObjectsAndKeys:@"request1",@"name", nil]];
-    [helper addQueue:request1];
-    //添加队列2
-    ServiceArgs *args1=[[[ServiceArgs alloc] init] autorelease];
-    args1.serviceURL=@"http://webservice.webxml.com.cn/WebServices/MobileCodeWS.asmx";
-    args1.serviceNameSpace=@"http://WebXml.com.cn/";
-    args1.methodName=@"getDatabaseInfo";
-    ASIHTTPRequest *request2=[ServiceHelper commonSharedRequest:args1];
-    [request1 setUserInfo:[NSDictionary dictionaryWithObjectsAndKeys:@"request2",@"name", nil]];
-    [helper addQueue:request2];
-
-     [self showLoadingAnimatedWithTitle:@"正在执行队列请求,请稍等..."];
-    //执行队列
-    [helper startQueue:^(ServiceResult *result) {
-        NSString *name=[result.userInfo objectForKey:@"name"];
-        NSLog(@"%@请求成功，xml=%@",name,result.xmlString);
-    } failed:^(NSError *error, NSDictionary *userInfo) {
-        NSString *name=[userInfo objectForKey:@"name"];
-        NSLog(@"%@请求失败，失败原因:%@",name,[error description]);
-    } complete:^(NSArray *results) {
-        NSLog(@"排队列请求完成！\n");
-        [self hideLoadingSuccessWithTitle:@"排队列请求完成！" completed:nil];
-    }];
-     ***/
-    
-    
     ASIServiceHelper *helper=[[ASIServiceHelper alloc] init];
     //添加队列1
     ASIHTTPRequest *request1=[[ASIServiceArgs serviceMethodName:@"getForexRmbRate"] request];
