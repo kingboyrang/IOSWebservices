@@ -113,10 +113,11 @@
     }
     return nil;
 }
--(NSArray*)selectNodes:(NSString*)xpath className:(NSString*)className{
-    return [self selectNodes:xpath nameSpaces:nil className:className];
+-(NSArray*)selectNodes:(NSString*)xpath forObject:(Class)cls{
+    
+    return [self selectNodes:xpath nameSpaces:nil forObject:cls];
 }
--(NSArray*)selectNodes:(NSString*)xpath nameSpaces:(NSDictionary*)spaces className:(NSString*)className{
+-(NSArray*)selectNodes:(NSString*)xpath nameSpaces:(NSDictionary*)spaces forObject:(Class)cls{
     if (self.document) {
         NSMutableArray *array=[NSMutableArray array];
         GDataXMLElement* rootNode = [self.document rootElement];
@@ -127,23 +128,23 @@
             childs=[rootNode nodesForXPath:xpath error:nil];
         }
         for (GDataXMLNode *item in childs){
-            [array addObject:[self childsNodeToObject:item objectName:className]];
+            [array addObject:[self childsNodeToObject:item forObject:cls]];
         }
         return array;
     }
     return nil;
 }
--(id)nodeToObject:(GDataXMLNode*)node className:(NSString*)className{
-    if (node&&className&&[className length]>0) {
-        return [self childsNodeToObject:node objectName:className];
+-(id)nodeToObject:(GDataXMLNode*)node forObject:(Class)cls{
+    if (node&&cls) {
+        return [self childsNodeToObject:node forObject:cls];
     }
     return nil;
 }
--(NSArray*)nodesChildsNodesToObjects:(GDataXMLNode*)node objectName:(NSString*)className{
+-(NSArray*)nodesChildsNodesToObjects:(GDataXMLNode*)node forObject:(Class)cls{
     NSMutableArray *result=[NSMutableArray array];
     NSArray *childs=[node children];
     for (GDataXMLNode *item in childs){
-        [result addObject:[self childsNodeToObject:item objectName:className]];
+        [result addObject:[self childsNodeToObject:item forObject:cls]];
     }
     return result;
 }
@@ -153,9 +154,9 @@
 -(NSArray*)soapXmlSelectNodes:(NSString*)xpath{
     return [self selectNodes:xpath nameSpaces:soapXmlNamespaces];
 }
--(NSArray*)soapXmlSelectNodes:(NSString*)xpath className:(NSString*)className{
+-(NSArray*)soapXmlSelectNodes:(NSString*)xpath forObject:(Class)cls{
     
-    return [self selectNodes:xpath nameSpaces:soapXmlNamespaces className:className];
+    return [self selectNodes:xpath nameSpaces:soapXmlNamespaces forObject:cls];
 }
 -(NSDictionary*)getXmlNodeAttrs:(GDataXMLNode*)node{
     return [self getNodeAttributes:node];
@@ -227,13 +228,13 @@
     }
     return nil;
 }
--(NSArray*)childNodesToObject:(NSString*)className{
+-(NSArray*)childNodesToObject:(Class)cls{
     if (self.document) {
         GDataXMLElement *root=[self.document rootElement];
         NSArray *childs=[root children];
         NSMutableArray *result=[NSMutableArray array];
         for (GDataXMLNode *item in childs) {
-            [result addObject:[self nodeToObject:item className:className]];
+            [result addObject:[self nodeToObject:item forObject:cls]];
         }
         return result;
     }
@@ -378,8 +379,8 @@
     }
     return dic;
 }
--(id)childsNodeToObject:(GDataXMLNode*)node objectName:(NSString*)className{
-    id obj=[[NSClassFromString(className) alloc] init];
+-(id)childsNodeToObject:(GDataXMLNode*)node forObject:(Class)cls{
+    id obj = [[cls alloc] init];
     NSArray *childs=[node children];
     for (GDataXMLNode *item in childs){
         SEL sel=NSSelectorFromString(item.name);
